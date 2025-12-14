@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-g" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark-background': '#020617', // Like Tailwind's slate-950
+            primary: {
+              50: 'rgb(var(--primary-50-rgb) / <alpha-value>)',
+              100: 'rgb(var(--primary-100-rgb) / <alpha-value>)',
+              200: 'rgb(var(--primary-200-rgb) / <alpha-value>)',
+              300: 'rgb(var(--primary-300-rgb) / <alpha-value>)',
+              400: 'rgb(var(--primary-400-rgb) / <alpha-value>)',
+              500: 'rgb(var(--primary-500-rgb) / <alpha-value>)',
+              600: 'rgb(var(--primary-600-rgb) / <alpha-value>)',
+              700: 'rgb(var(--primary-700-rgb) / <alpha-value>)',
+              800: 'rgb(var(--primary-800-rgb) / <alpha-value>)',
+              900: 'rgb(var(--primary-900-rgb) / <alpha-value>)',
+              950: 'rgb(var(--primary-950-rgb) / <alpha-value>)',
+            }
+          },
+          animation: {
+            'aurora': 'aurora 60s linear infinite alternate',
+            'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+            'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+
+      /* Light theme (blue) */
+      --primary-50-rgb: 219 234 254;
+      --primary-100-rgb: 191 219 254;
+      --primary-200-rgb: 147 197 253;
+      --primary-300-rgb: 96 165 250;
+      --primary-400-rgb: 59 130 246;
+      --primary-500-rgb: 37 99 240;
+      --primary-600-rgb: 29 78 216;
+      --primary-700-rgb: 30 64 175;
+      --primary-800-rgb: 30 58 138;
+      --primary-900-rgb: 23 37 84;
+      --primary-950-rgb: 17 24 39;
+
+      --primary-500-hex: #2563eb;
+
+
+    }
+
+    html.dark {
+      /* Dark theme (Teal) */
+      --primary-50-rgb: 240 253 250;
+      --primary-100-rgb: 204 251 241;
+      --primary-200-rgb: 153 246 228;
+      --primary-300-rgb: 80 231 204;
+      --primary-400-rgb: 45 212 191;
+      --primary-500-rgb: 20 184 166;
+      --primary-600-rgb: 13 148 136;
+      --primary-700-rgb: 15 118 110;
+      --primary-800-rgb: 17 94 89;
+      --primary-900-rgb: 19 78 74;
+      --primary-950-rgb: 4 47 46;
+      --primary-500-hex: #14b8a6;
+    }
+
+    @keyframes aurora {
+      0% {
+        transform: translateX(-25%) translateY(-25%) rotate(0deg) scale(1);
+        filter: blur(64px);
+      }
+
+      50% {
+        transform: translateX(25%) translateY(25%) rotate(180deg) scale(1.2);
+        filter: blur(96px);
+      }
+
+      100% {
+        transform: translateX(-25%) translateY(-25%) rotate(360deg) scale(1);
+        filter: blur(64px);
+      }
+    }
+
+    @keyframes fade-in-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--primary-500-rgb), 0.4);
+      }
+
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 10px rgba(var(--primary-500-rgb), 0);
+      }
+    }
+
+    ::selection {
+      background-color: var(--primary-500-hex);
+      color: white;
+    }
+
+    .animated-element {
+      opacity: 0;
+    }
+
+    .animate-fade-in-up {
+      animation-fill-mode: forwards;
+    }
+
+    [style*="--stagger"] {
+      animation-delay: calc(var(--stagger) * 100ms);
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-icons": "https://esm.sh/react-icons@5.2.1",
+    "react-icons/": "https://esm.sh/react-icons@5.2.1/"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
