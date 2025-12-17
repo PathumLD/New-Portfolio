@@ -5,7 +5,7 @@ import { FaFlask } from 'react-icons/fa';
 export const tutoringData: Grade[] = [
   {
     id: 'grade-9-math',
-    level: 'Grade 9 - Mathematics',
+    level: 'Grade 6 - ICT',
     description: 'Master fundamental concepts of algebra, geometry, and trigonometry essential for higher studies.',
     icon: FiBookOpen,
     lessons: [
@@ -25,7 +25,7 @@ export const tutoringData: Grade[] = [
   },
   {
     id: 'grade-10-science',
-    level: 'Grade 10 - Science',
+    level: 'Grade 7 - ICT',
     description: 'Dive into the world of biology, chemistry, and physics with hands-on examples and experiments.',
     icon: FaFlask,
     lessons: [
@@ -46,6 +46,86 @@ export const tutoringData: Grade[] = [
         title: 'Introduction to Motion',
         description: 'Learn about Newton\'s laws of motion, speed, velocity, and acceleration.',
         thumbnail: 'https://picsum.photos/seed/science3/600/400',
+      },
+    ],
+  },
+  {
+    id: 'grade-9-math',
+    level: 'Grade 8 - ICT',
+    description: 'Master fundamental concepts of algebra, geometry, and trigonometry essential for higher studies.',
+    icon: FiBookOpen,
+    lessons: [
+      {
+        id: 'alg-101',
+        title: 'Introduction to Algebra',
+        description: 'Learn about variables, expressions, and solving linear equations. This is the foundation of all math.',
+        thumbnail: 'https://picsum.photos/seed/math1/600/400',
+      },
+      {
+        id: 'geo-101',
+        title: 'Geometry Basics',
+        description: 'Explore shapes, angles, and proofs. Understand the properties of triangles and circles.',
+        thumbnail: 'https://picsum.photos/seed/math2/600/400',
+      },
+    ],
+  },
+  {
+    id: 'grade-9-math',
+    level: 'Grade 9 - ICT',
+    description: 'Master fundamental concepts of algebra, geometry, and trigonometry essential for higher studies.',
+    icon: FiBookOpen,
+    lessons: [
+      {
+        id: 'alg-101',
+        title: 'Introduction to Algebra',
+        description: 'Learn about variables, expressions, and solving linear equations. This is the foundation of all math.',
+        thumbnail: 'https://picsum.photos/seed/math1/600/400',
+      },
+      {
+        id: 'geo-101',
+        title: 'Geometry Basics',
+        description: 'Explore shapes, angles, and proofs. Understand the properties of triangles and circles.',
+        thumbnail: 'https://picsum.photos/seed/math2/600/400',
+      },
+    ],
+  },
+  {
+    id: 'grade-9-math',
+    level: 'Grade 10 - ICT',
+    description: 'Master fundamental concepts of algebra, geometry, and trigonometry essential for higher studies.',
+    icon: FiBookOpen,
+    lessons: [
+      {
+        id: 'alg-101',
+        title: 'Introduction to Algebra',
+        description: 'Learn about variables, expressions, and solving linear equations. This is the foundation of all math.',
+        thumbnail: 'https://picsum.photos/seed/math1/600/400',
+      },
+      {
+        id: 'geo-101',
+        title: 'Geometry Basics',
+        description: 'Explore shapes, angles, and proofs. Understand the properties of triangles and circles.',
+        thumbnail: 'https://picsum.photos/seed/math2/600/400',
+      },
+    ],
+  },
+  {
+    id: 'grade-9-math',
+    level: 'Grade 11 - ICT',
+    description: 'Master fundamental concepts of algebra, geometry, and trigonometry essential for higher studies.',
+    icon: FiBookOpen,
+    lessons: [
+      {
+        id: 'alg-101',
+        title: 'Introduction to Algebra',
+        description: 'Learn about variables, expressions, and solving linear equations. This is the foundation of all math.',
+        thumbnail: 'https://picsum.photos/seed/math1/600/400',
+      },
+      {
+        id: 'geo-101',
+        title: 'Geometry Basics',
+        description: 'Explore shapes, angles, and proofs. Understand the properties of triangles and circles.',
+        thumbnail: 'https://picsum.photos/seed/math2/600/400',
       },
     ],
   },

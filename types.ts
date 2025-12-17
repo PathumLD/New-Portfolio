@@ -64,6 +64,13 @@ export interface ProfileData {
   name: string;
   title: string;
   email: string;
+  phone?: string;
+  location: string;
+  age?: number;
+  yearsOfExperience: number;
+  availability: string;
+  languages: string[];
+  education: string;
   shortBio: string;
   longBio: string;
   profilePicture: string;
