@@ -6,8 +6,8 @@ import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
-  { name: 'Projects', path: '/projects' },
   { name: 'My Journey', path: '/credentials' },
+  { name: 'Projects', path: '/projects' },
   { name: 'Certificates/Awards', path: '/certifications-awards' },
   { name: 'Tutoring', path: '/tutoring' },
   { name: 'Blog', path: '/blog' },

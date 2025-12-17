@@ -238,7 +238,7 @@ const AboutPage: React.FC = () => {
       </div>
 
       {/* Stats/Highlights Section */}
-      <div
+      {/* <div
         className="animated-element animate-fade-in-up mt-20"
         style={{ '--stagger': 5 } as React.CSSProperties}
       >
@@ -256,7 +256,7 @@ const AboutPage: React.FC = () => {
             <div className="text-gray-600 dark:text-gray-300 font-medium">Happy Clients</div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Call to Action */}
       <div
