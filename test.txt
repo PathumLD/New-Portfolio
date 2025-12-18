@@ -1,0 +1,1 @@
+now I want to remove all mock data from Experience in credentials page and data display by retriving from database. write an api for get experience data from database.  clearly set the folder and file structure as senior software engineer. follow prisma.schema file
