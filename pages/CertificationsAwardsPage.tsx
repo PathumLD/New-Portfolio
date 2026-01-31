@@ -6,12 +6,12 @@ import { awards } from '../data/awards';
 import { Certification, Award } from '../types';
 
 const CertAwardCard: React.FC<{ item: Certification | Award }> = ({ item }) => (
-    <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg mb-6 transition-all hover:shadow-xl border border-black/5 dark:border-white/10">
+    <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg mb-6 transition-all hover:shadow-xl border border-black/5 dark:border-white/10">
         <div className="flex justify-between items-start">
             <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
-                <p className="text-md text-gray-600 dark:text-gray-400 mt-1">{item.issuer}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">{item.date}</p>
+                <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.title}</h3>
+                <p className="text-md text-[#1c1a1c]/70 dark:text-white/70 mt-1">{item.issuer}</p>
+                <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60 mt-1">{item.date}</p>
             </div>
             {'credentialUrl' in item && item.credentialUrl && (
                 <a href={item.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-200 flex-shrink-0 ml-4 transition-colors">
@@ -49,8 +49,8 @@ const CertificationsAwardsPage: React.FC = () => {
   return (
     <div>
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">Achievements</h1>
-        <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">My certifications and awards.</p>
+        <h1 className="text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white sm:text-5xl">Achievements</h1>
+        <p className="mt-4 text-xl text-[#1c1a1c]/70 dark:text-white/70">My certifications and awards.</p>
       </div>
       <div className="max-w-4xl mx-auto">
         <TabbedContent tabs={tabs} />
@@ -60,3 +60,4 @@ const CertificationsAwardsPage: React.FC = () => {
 };
 
 export default CertificationsAwardsPage;
+

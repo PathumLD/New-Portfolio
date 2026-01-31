@@ -46,7 +46,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             />
 
             {/* Dialog */}
-            <div className="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl animate-fade-in-up">
+            <div className="relative w-full max-w-md bg-white dark:bg-dark-background rounded-2xl shadow-2xl animate-fade-in-up">
                 <div className="p-6">
                     {/* Icon */}
                     <div className="flex justify-center mb-4">
@@ -57,10 +57,10 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 
                     {/* Content */}
                     <div className="text-center">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        <h3 className="text-lg font-semibold text-[#1c1a1c] dark:text-white mb-2">
                             {title}
                         </h3>
-                        <p className="text-gray-500 dark:text-gray-400">{message}</p>
+                        <p className="text-[#1c1a1c]/60 dark:text-white/60">{message}</p>
                     </div>
 
                     {/* Actions */}
@@ -68,7 +68,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            className="px-4 py-2 rounded-lg text-[#1c1a1c]/70 dark:text-white/70 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors"
                         >
                             Cancel
                         </button>
@@ -110,3 +110,5 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 };
 
 export default ConfirmDialog;
+
+

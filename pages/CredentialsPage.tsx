@@ -7,22 +7,22 @@ import { volunteering } from '../data/volunteering';
 import { Education, Experience, Volunteering } from '../types';
 
 const InfoCard: React.FC<{ item: Education | Experience | Volunteering; alignment: 'left' | 'right' }> = ({ item, alignment }) => (
-  <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 w-full text-left">
-    {'degree' in item && <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.degree}</h3>}
-    {'role' in item && <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.role}</h3>}
+  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 w-full text-left">
+    {'degree' in item && <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.degree}</h3>}
+    {'role' in item && <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.role}</h3>}
 
-    <p className="text-md font-semibold text-primary-600 dark:text-primary-400 mt-1">
+    <p className="text-md font-semibold text-green-600 dark:text-green-400 mt-1">
       {'institution' in item && item.institution}
       {'company' in item && item.company}
       {'organization' in item && item.organization}
     </p>
 
-    <p className="text-sm text-gray-500 dark:text-gray-400 my-2">{item.period}</p>
-    <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
+    <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60 my-2">{item.period}</p>
+    <p className="text-[#1c1a1c]/80 dark:text-white/80">{item.description}</p>
     {'skills' in item && item.skills && (
       <div className={`flex flex-wrap gap-2 mt-4 ${alignment === 'right' ? 'sm:justify-end' : 'justify-start'}`}>
         {item.skills.map(skill => (
-          <span key={skill} className="bg-gray-200/50 dark:bg-gray-700/50 text-gray-800 dark:text-gray-200 text-xs font-medium px-2.5 py-0.5 rounded-full">{skill}</span>
+          <span key={skill} className="bg-primary-100/30 dark:bg-primary-900/20 text-[#1c1a1c]/90 dark:text-white/90 text-xs font-medium px-2.5 py-0.5 rounded-full">{skill}</span>
         ))}
       </div>
     )}
@@ -32,7 +32,7 @@ const InfoCard: React.FC<{ item: Education | Experience | Volunteering; alignmen
 const Timeline: React.FC<{ items: (Education | Experience | Volunteering)[] }> = ({ items }) => (
   <div className="relative">
     {/* Vertical line */}
-    <div className="absolute left-4 sm:left-1/2 top-1 h-full w-0.5 bg-gray-300 dark:bg-gray-600 transform sm:-translate-x-1/2"></div>
+    <div className="absolute left-4 sm:left-1/2 top-1 h-full w-0.5 bg-green-200 dark:bg-green-800 transform sm:-translate-x-1/2"></div>
 
     <div className="space-y-12">
       {items.map((item, index) => (
@@ -43,8 +43,8 @@ const Timeline: React.FC<{ items: (Education | Experience | Volunteering)[] }> =
         >
           <div className="sm:flex items-start">
             {/* Dot */}
-            <div className="hidden sm:block absolute left-1/2 top-1 w-5 h-5 rounded-full bg-primary-500 border-4 border-gray-50 dark:border-dark-background transform -translate-x-1/2 z-10"></div>
-            <div className="sm:hidden absolute left-4 top-1 w-5 h-5 rounded-full bg-primary-500 border-4 border-gray-50 dark:border-dark-background transform -translate-x-1/2 z-10"></div>
+            <div className="hidden sm:block absolute left-1/2 top-1 w-5 h-5 rounded-full bg-green-500 border-4 border-white dark:border-dark-background transform -translate-x-1/2 z-10"></div>
+            <div className="sm:hidden absolute left-4 top-1 w-5 h-5 rounded-full bg-green-500 border-4 border-white dark:border-dark-background transform -translate-x-1/2 z-10"></div>
 
             {/* Content Card */}
             <div className={`w-full sm:w-1/2 ${index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8 sm:ml-auto'}`}>
@@ -81,8 +81,8 @@ const CredentialsPage: React.FC = () => {
   return (
     <div>
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">My Journey</h1>
-        <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">My professional and academic journey.</p>
+        <h1 className="text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white sm:text-5xl">My Journey</h1>
+        <p className="mt-4 text-xl text-[#1c1a1c]/70 dark:text-white/70">My professional and academic journey.</p>
       </div>
       <div className="max-w-4xl mx-auto">
         <TabbedContent tabs={tabs} />
@@ -92,3 +92,5 @@ const CredentialsPage: React.FC = () => {
 };
 
 export default CredentialsPage;
+
+

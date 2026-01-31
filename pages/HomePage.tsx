@@ -12,13 +12,13 @@ import { Project, Blog, Experience, Certification } from '../types';
 // Section Header Component
 const SectionHeader: React.FC<{ title: string; subtitle?: string; link: string }> = ({ title, subtitle, link }) => (
   <div className="text-center mb-12">
-    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white mb-4">
       {title}
     </h2>
-    {subtitle && <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">{subtitle}</p>}
+    {subtitle && <p className="text-lg text-[#1c1a1c]/70 dark:text-white/70 mb-6">{subtitle}</p>}
     <Link
       to={link}
-      className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors group"
+      className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors group"
     >
       View All
       <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -28,21 +28,21 @@ const SectionHeader: React.FC<{ title: string; subtitle?: string; link: string }
 
 // Project Card Component
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
-  <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/20 transform hover:-translate-y-1 flex flex-col h-full">
+  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/20 transform hover:-translate-y-1 flex flex-col h-full">
     <div className="relative overflow-hidden">
       <img src={project.image} alt={project.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
     </div>
     <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
-      <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm flex-grow">{project.description}</p>
+      <h3 className="text-xl font-bold mb-2 text-[#1c1a1c] dark:text-white">{project.title}</h3>
+      <p className="text-[#1c1a1c]/70 dark:text-white/70 mb-4 text-sm flex-grow">{project.description}</p>
       <div className="mt-auto">
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.slice(0, 3).map(tag => (
-            <span key={tag} className="bg-primary-100/50 dark:bg-primary-900/50 text-primary-800 dark:text-primary-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">{tag}</span>
+            <span key={tag} className="bg-green-100/50 dark:bg-green-900/50 text-green-800 dark:text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">{tag}</span>
           ))}
         </div>
         <div className="flex justify-end space-x-4">
-          {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors">Code</a>}
+          {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#1c1a1c]/70 dark:text-white/70 hover:text-primary-500 transition-colors">Code</a>}
           {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-full shadow-md transition-all hover:scale-105">Live Demo</a>}
         </div>
       </div>
@@ -52,17 +52,17 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
 
 // Blog Card Component
 const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => (
-  <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/20 transform hover:-translate-y-1 flex flex-col h-full">
+  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/20 transform hover:-translate-y-1 flex flex-col h-full">
     <div className="relative overflow-hidden">
       <img src={blog.thumbnail} alt={blog.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
     </div>
     <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{blog.title}</h3>
-      <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm flex-grow">{blog.description}</p>
+      <h3 className="text-xl font-bold mb-2 text-[#1c1a1c] dark:text-white">{blog.title}</h3>
+      <p className="text-[#1c1a1c]/70 dark:text-white/70 mb-4 text-sm flex-grow">{blog.description}</p>
       <div className="mt-auto">
         <div className="flex flex-wrap gap-2 mb-4">
           {blog.tags.slice(0, 3).map(tag => (
-            <span key={tag} className="bg-primary-100/50 dark:bg-primary-900/50 text-primary-800 dark:text-primary-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">{tag}</span>
+            <span key={tag} className="bg-green-100/50 dark:bg-green-900/50 text-green-800 dark:text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">{tag}</span>
           ))}
         </div>
         <div className="flex justify-end space-x-4">
@@ -78,27 +78,27 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => (
 
 // Grade Card Component
 const GradeCard: React.FC<{ grade: typeof tutoringData[0] }> = ({ grade }) => (
-  <Link to={`/tutoring/${grade.id}`} className="h-full bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border border-black/5 dark:border-white/10 relative overflow-hidden flex flex-col">
+  <Link to={`/tutoring/${grade.id}`} className="h-full bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border border-black/5 dark:border-white/10 relative overflow-hidden flex flex-col">
     <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     <div className="relative flex flex-col flex-grow">
       <grade.icon className="h-12 w-12 text-primary-500 mb-4 transition-colors group-hover:text-primary-600" />
-      <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{grade.level}</h3>
-      <p className="text-gray-600 dark:text-gray-300 flex-grow">{grade.description}</p>
+      <h3 className="text-2xl font-bold mb-2 text-[#1c1a1c] dark:text-white">{grade.level}</h3>
+      <p className="text-[#1c1a1c]/70 dark:text-white/70 flex-grow">{grade.description}</p>
     </div>
   </Link>
 );
 
 // Experience Card Component
 const ExperienceCard: React.FC<{ item: Experience }> = ({ item }) => (
-  <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.role}</h3>
-    <p className="text-md font-semibold text-primary-600 dark:text-primary-400 mt-1">{item.company}</p>
-    <p className="text-sm text-gray-500 dark:text-gray-400 my-2">{item.period}</p>
-    <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
+  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+    <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.role}</h3>
+    <p className="text-md font-semibold text-green-600 dark:text-green-400 mt-1">{item.company}</p>
+    <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60 my-2">{item.period}</p>
+    <p className="text-[#1c1a1c]/80 dark:text-white/80">{item.description}</p>
     {item.skills && (
       <div className="flex flex-wrap gap-2 mt-4">
         {item.skills.slice(0, 4).map(skill => (
-          <span key={skill} className="bg-gray-200/50 dark:bg-gray-700/50 text-gray-800 dark:text-gray-200 text-xs font-medium px-2.5 py-0.5 rounded-full">{skill}</span>
+          <span key={skill} className="bg-primary-100/30 dark:bg-primary-900/20 text-gray-800 dark:text-gray-200 text-xs font-medium px-2.5 py-0.5 rounded-full">{skill}</span>
         ))}
       </div>
     )}
@@ -107,10 +107,10 @@ const ExperienceCard: React.FC<{ item: Experience }> = ({ item }) => (
 
 // Certification Card Component
 const CertificationCard: React.FC<{ item: Certification }> = ({ item }) => (
-  <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
     <div className="flex justify-between items-start">
       <div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
+        <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.title}</h3>
         <p className="text-md text-gray-600 dark:text-gray-400 mt-1">{item.issuer}</p>
         <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">{item.date}</p>
       </div>
@@ -238,15 +238,15 @@ const ContactSection = lazy(() => Promise.resolve({
           subtitle="I'd love to hear from you. Let's connect!"
           link="/contact"
         />
-        <div className="max-w-2xl mx-auto bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg p-8 rounded-2xl shadow-lg border border-black/5 dark:border-white/10">
+        <div className="max-w-2xl mx-auto bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-8 rounded-2xl shadow-lg border border-black/5 dark:border-white/10">
           <div className="text-center space-y-6">
-            <p className="text-lg text-gray-700 dark:text-gray-300">
+            <p className="text-lg text-[#1c1a1c]/80 dark:text-white/80">
               Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out!
             </p>
             <div className="space-y-4">
               <p className="text-gray-600 dark:text-gray-400">
-                <strong className="text-gray-900 dark:text-white">Email:</strong>{' '}
-                <a href={`mailto:${profileData.email}`} className="text-primary-600 dark:text-primary-400 hover:underline">
+                <strong className="text-[#1c1a1c] dark:text-white">Email:</strong>{' '}
+                <a href={`mailto:${profileData.email}`} className="text-green-600 dark:text-green-400 hover:underline">
                   {profileData.email}
                 </a>
               </p>
@@ -257,7 +257,7 @@ const ContactSection = lazy(() => Promise.resolve({
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500/50 transition-all duration-300 hover:-translate-y-1"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm border border-black/10 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1"
                   >
                     <social.icon className="w-5 h-5" />
                   </a>
@@ -266,7 +266,7 @@ const ContactSection = lazy(() => Promise.resolve({
             </div>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-green-500 dark:hover:bg-primary-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 hover:-translate-y-0.5"
             >
               Send Message
               <FiArrowRight />
@@ -283,7 +283,7 @@ const SectionLoader = () => (
   <div className="py-20">
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-400"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 dark:border-primary-400"></div>
       </div>
     </div>
   </div>
@@ -302,10 +302,10 @@ const HomePage: React.FC = () => {
                 className="animated-element animate-fade-in-up inline-block"
                 style={{ '--stagger': 1 } as React.CSSProperties}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/10 text-primary-600 dark:text-primary-400 text-sm font-medium border border-primary-500/20">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-green-500/20">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
                   Available for opportunities
                 </span>
@@ -315,22 +315,22 @@ const HomePage: React.FC = () => {
                 className="animated-element animate-fade-in-up text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
                 style={{ '--stagger': 2 } as React.CSSProperties}
               >
-                <span className="text-gray-900 dark:text-white">Hi, I'm</span>
+                <span className="text-[#1c1a1c] dark:text-white">Hi, I'm</span>
                 <br />
-                <span className="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
                   {profileData.name}
                 </span>
               </h1>
 
               <p
-                className="animated-element animate-fade-in-up text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light max-w-2xl mx-auto lg:mx-0"
+                className="animated-element animate-fade-in-up text-xl md:text-2xl text-[#1c1a1c]/70 dark:text-white/70 font-light max-w-2xl mx-auto lg:mx-0"
                 style={{ '--stagger': 3 } as React.CSSProperties}
               >
                 {profileData.title}
               </p>
 
               <p
-                className="animated-element animate-fade-in-up text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto lg:mx-0"
+                className="animated-element animate-fade-in-up text-base md:text-lg text-[#1c1a1c]/60 dark:text-white/60 max-w-xl mx-auto lg:mx-0"
                 style={{ '--stagger': 4 } as React.CSSProperties}
               >
                 {profileData.shortBio}
@@ -343,14 +343,14 @@ const HomePage: React.FC = () => {
               >
                 <Link
                   to="/projects"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5"
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-green-500 dark:hover:bg-primary-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 hover:-translate-y-0.5"
                 >
                   View My Work
                   <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-900 dark:text-white rounded-2xl font-medium border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-[#1c1a1c] dark:text-white rounded-2xl font-medium border border-black/10 dark:border-white/10 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
                 >
                   Get In Touch
                 </Link>
@@ -367,7 +367,7 @@ const HomePage: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500/50 transition-all duration-300 hover:-translate-y-1"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm border border-black/10 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1"
                   >
                     <social.icon className="w-5 h-5" />
                   </a>
@@ -382,7 +382,7 @@ const HomePage: React.FC = () => {
             >
               <div className="relative max-w-md mx-auto">
                 {/* Decorative Gradient Blob */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary-400 to-blue-400 dark:from-primary-500 dark:to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-400 dark:from-green-500 dark:to-emerald-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
 
                 {/* Profile Image Container */}
                 <div className="relative">
@@ -395,14 +395,14 @@ const HomePage: React.FC = () => {
                   </div>
 
                   {/* Floating Skill Cards */}
-                  <div className="absolute -top-4 -right-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-gray-200 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s' }}>
-                    <FiCode className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <div className="absolute -top-4 -right-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-black/10 dark:border-white/10 animate-bounce" style={{ animationDuration: '3s' }}>
+                    <FiCode className="w-6 h-6 text-green-600 dark:text-green-400" />
                   </div>
-                  <div className="absolute -bottom-4 -left-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-gray-200 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s', animationDelay: '1s' }}>
-                    <FiPenTool className="w-6 h-6 text-blue-600 dark:text-cyan-400" />
+                  <div className="absolute -bottom-4 -left-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-black/10 dark:border-white/10 animate-bounce" style={{ animationDuration: '3s', animationDelay: '1s' }}>
+                    <FiPenTool className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <div className="absolute top-1/2 -left-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-gray-200 dark:border-gray-700 animate-bounce" style={{ animationDuration: '3s', animationDelay: '2s' }}>
-                    <FiBookOpen className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  <div className="absolute top-1/2 -left-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-black/10 dark:border-white/10 animate-bounce" style={{ animationDuration: '3s', animationDelay: '2s' }}>
+                    <FiBookOpen className="w-6 h-6 text-green-600 dark:text-green-400" />
                   </div>
                 </div>
               </div>
@@ -414,17 +414,17 @@ const HomePage: React.FC = () => {
             className="animated-element animate-fade-in-up mt-20 lg:mt-32"
             style={{ '--stagger': 7 } as React.CSSProperties}
           >
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 text-center mb-6">
+            <p className="text-sm font-medium text-[#1c1a1c]/60 dark:text-white/60 text-center mb-6">
               Technologies I work with
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               {profileData.skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="group flex items-center gap-3 px-6 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-700 hover:border-primary-500/50 dark:hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                  className="group flex items-center gap-3 px-6 py-3 bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-full border border-black/10 dark:border-white/10 hover:border-green-500/50 dark:hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
                 >
-                  <skill.icon className="w-6 h-6 text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
+                  <skill.icon className="w-6 h-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium text-[#1c1a1c]/80 dark:text-white/80">{skill.name}</span>
                 </div>
               ))}
             </div>
@@ -461,3 +461,4 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+

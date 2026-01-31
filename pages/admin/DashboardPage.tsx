@@ -83,23 +83,23 @@ const DashboardPage: React.FC = () => {
     }, []);
 
     const statCards: StatCard[] = [
-        { label: 'Skills', count: stats.skills, icon: FiCode, to: '/admin/skills', color: 'bg-blue-500' },
-        { label: 'Projects', count: stats.projects, icon: FiFolder, to: '/admin/projects', color: 'bg-purple-500' },
+        { label: 'Skills', count: stats.skills, icon: FiCode, to: '/admin/skills', color: 'bg-emerald-500' },
+        { label: 'Projects', count: stats.projects, icon: FiFolder, to: '/admin/projects', color: 'bg-green-500' },
         { label: 'Experiences', count: stats.experiences, icon: FiBriefcase, to: '/admin/experiences', color: 'bg-green-500' },
         { label: 'Education', count: stats.education, icon: FiBookOpen, to: '/admin/education', color: 'bg-yellow-500' },
-        { label: 'Volunteers', count: stats.volunteers, icon: FiHeart, to: '/admin/volunteers', color: 'bg-pink-500' },
-        { label: 'Certificates', count: stats.certificates, icon: FiAward, to: '/admin/certificates', color: 'bg-indigo-500' },
+        { label: 'Volunteers', count: stats.volunteers, icon: FiHeart, to: '/admin/volunteers', color: 'bg-lime-500' },
+        { label: 'Certificates', count: stats.certificates, icon: FiAward, to: '/admin/certificates', color: 'bg-teal-500' },
         { label: 'Awards', count: stats.awards, icon: FiStar, to: '/admin/awards', color: 'bg-orange-500' },
-        { label: 'Tutoring Grades', count: stats.tutoringGrades, icon: FiBook, to: '/admin/tutoring', color: 'bg-teal-500' },
-        { label: 'Blogs', count: stats.blogs, icon: FiFileText, to: '/admin/blogs', color: 'bg-cyan-500' },
+        { label: 'Tutoring Grades', count: stats.tutoringGrades, icon: FiBook, to: '/admin/tutoring', color: 'bg-emerald-600' },
+        { label: 'Blogs', count: stats.blogs, icon: FiFileText, to: '/admin/blogs', color: 'bg-green-600' },
     ];
 
     return (
         <div className="space-y-8">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
+                <h1 className="text-3xl font-bold text-[#1c1a1c] dark:text-white">Dashboard</h1>
+                <p className="text-[#1c1a1c]/60 dark:text-white/60 mt-1">
                     Welcome to your portfolio admin dashboard
                 </p>
             </div>
@@ -110,17 +110,17 @@ const DashboardPage: React.FC = () => {
                     <Link
                         key={card.label}
                         to={card.to}
-                        className="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-800"
+                        className="group bg-white dark:bg-dark-background rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-black/10 dark:border-white/10"
                     >
                         <div className="p-6">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    <p className="text-sm font-medium text-[#1c1a1c]/60 dark:text-white/60">
                                         {card.label}
                                     </p>
-                                    <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
+                                    <p className="text-3xl font-bold text-[#1c1a1c] dark:text-white mt-1">
                                         {loading ? (
-                                            <span className="inline-block w-12 h-8 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
+                                            <span className="inline-block w-12 h-8 bg-primary-100 dark:bg-primary-900/40 rounded animate-pulse" />
                                         ) : (
                                             card.count
                                         )}
@@ -132,7 +132,7 @@ const DashboardPage: React.FC = () => {
                                     <card.icon className="w-6 h-6" />
                                 </div>
                             </div>
-                            <div className="mt-4 flex items-center text-sm text-primary-600 dark:text-primary-400">
+                            <div className="mt-4 flex items-center text-sm text-green-600 dark:text-green-400">
                                 <span>Manage {card.label}</span>
                                 <FiTrendingUp className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                             </div>
@@ -142,35 +142,35 @@ const DashboardPage: React.FC = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-800">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="bg-white dark:bg-dark-background rounded-xl shadow-sm p-6 border border-black/10 dark:border-white/10">
+                <h2 className="text-xl font-semibold text-[#1c1a1c] dark:text-white mb-4">
                     Quick Actions
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <Link
                         to="/admin/projects"
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-black/15 dark:border-white/15 hover:border-green-500 dark:hover:border-green-500 text-[#1c1a1c]/60 dark:text-white/60 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                     >
                         <FiFolder className="w-8 h-8" />
                         <span className="text-sm font-medium">Add Project</span>
                     </Link>
                     <Link
                         to="/admin/blogs"
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-black/15 dark:border-white/15 hover:border-green-500 dark:hover:border-green-500 text-[#1c1a1c]/60 dark:text-white/60 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                     >
                         <FiFileText className="w-8 h-8" />
                         <span className="text-sm font-medium">Add Blog</span>
                     </Link>
                     <Link
                         to="/admin/experiences"
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-black/15 dark:border-white/15 hover:border-green-500 dark:hover:border-green-500 text-[#1c1a1c]/60 dark:text-white/60 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                     >
                         <FiBriefcase className="w-8 h-8" />
                         <span className="text-sm font-medium">Add Experience</span>
                     </Link>
                     <Link
                         to="/admin/skills"
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-dashed border-black/15 dark:border-white/15 hover:border-green-500 dark:hover:border-green-500 text-[#1c1a1c]/60 dark:text-white/60 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                     >
                         <FiCode className="w-8 h-8" />
                         <span className="text-sm font-medium">Add Skill</span>
@@ -182,3 +182,5 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
+
+

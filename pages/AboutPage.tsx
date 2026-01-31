@@ -13,14 +13,14 @@ const AboutPage: React.FC = () => {
         className="animated-element animate-fade-in-up text-center mb-16"
         style={{ '--stagger': 1 } as React.CSSProperties}
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/10 text-primary-600 dark:text-primary-400 text-sm font-medium border border-primary-500/20 mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
           <FiHeart className="w-4 h-4" />
           Get to know me
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#1c1a1c] dark:text-white mb-4">
           About Me
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p className="text-xl text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
           A little bit about my journey, passions, and what drives me forward.
         </p>
       </div>
@@ -35,23 +35,23 @@ const AboutPage: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="relative max-w-sm mx-auto">
               {/* Gradient Background */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary-400 to-blue-400 dark:from-primary-500 dark:to-cyan-500 rounded-3xl blur-2xl opacity-20"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-400 dark:from-green-500 dark:to-emerald-500 rounded-3xl blur-2xl opacity-20"></div>
 
               <div className="relative">
-                <div className="aspect-square rounded-3xl overflow-hidden border-4 border-white/50 dark:border-gray-800/50 shadow-2xl">
+                <div className="aspect-[3/4] rounded-3xl overflow-hidden border-4 mt-10 border-white/50 dark:border-gray-800/50 shadow-2xl">
                   <img
-                    src={profileData.profilePicture}
+                    src="./assets/Side.png"
                     alt={profileData.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-3 -right-3 bg-gradient-to-br from-primary-500 to-blue-500 dark:from-primary-400 dark:to-cyan-400 rounded-2xl p-4 shadow-xl">
+                <div className="absolute -top-3 -right-3 bg-gradient-to-br from-green-500 to-emerald-500 dark:from-green-400 dark:to-emerald-400 rounded-2xl p-4 shadow-xl">
                   <FiZap className="w-6 h-6 text-white" />
                 </div>
-                <div className="absolute -bottom-3 -left-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-xl border border-gray-200 dark:border-gray-700">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">{profileData.name}</p>
+                <div className="absolute -bottom-3 -left-3 bg-white/80 dark:bg-dark-background/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-xl border border-green-200 dark:border-green-700">
+                  <p className="text-sm font-bold text-[#1c1a1c] dark:text-white">{profileData.name}</p>
                 </div>
               </div>
             </div>
@@ -60,61 +60,61 @@ const AboutPage: React.FC = () => {
           {/* Bio and Details */}
           <div className="lg:col-span-3 space-y-6">
             {/* Name and Title */}
-            <div className="bg-gradient-to-br from-primary-500/10 to-blue-500/10 dark:from-primary-400/10 dark:to-cyan-400/10 backdrop-blur-sm rounded-2xl p-6 border border-primary-500/20 dark:border-primary-400/20 shadow-lg">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{profileData.name}</h2>
-              <p className="text-lg text-primary-600 dark:text-primary-400 font-medium mb-4">{profileData.title}</p>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{profileData.shortBio}</p>
+            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 dark:from-green-400/10 dark:to-emerald-400/10 backdrop-blur-sm rounded-2xl p-6 border border-green-500/20 dark:border-green-400/20 shadow-lg">
+              <h2 className="text-3xl font-bold text-[#1c1a1c] dark:text-white mb-2">{profileData.name}</h2>
+              <p className="text-lg text-green-600 dark:text-green-400 font-medium mb-4">{profileData.title}</p>
+              <p className="text-[#1c1a1c]/80 dark:text-white/80 leading-relaxed">{profileData.shortBio}</p>
             </div>
 
             {/* Contact & Education Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <FiMail className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <FiMail className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Email</p>
-                    <a href={`mailto:${profileData.email}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-all">
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Email</p>
+                    <a href={`mailto:${profileData.email}`} className="text-sm font-semibold text-[#1c1a1c] dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-all">
                       {profileData.email}
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <FiPhone className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <FiPhone className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Phone</p>
-                    <a href={`tel:${profileData.phone}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Phone</p>
+                    <a href={`tel:${profileData.phone}`} className="text-sm font-semibold text-[#1c1a1c] dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                       {profileData.phone}
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-2">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-2">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <HiAcademicCap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <HiAcademicCap className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Education</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.education}</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Education</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.education}</p>
                   </div>
                 </div>
               </div>
-              {/* <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-1">
+              {/* <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <HiAcademicCap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <HiAcademicCap className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Education</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.education}</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Education</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.education}</p>
                   </div>
                 </div>
               </div> */}
@@ -122,50 +122,50 @@ const AboutPage: React.FC = () => {
 
             {/* Quick Info Cards - Moved from left side */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <FiMapPin className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <FiMapPin className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Location</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.location}</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Location</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.location}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <FiBriefcase className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <FiBriefcase className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Experience</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.yearsOfExperience}+ Years</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Experience</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.yearsOfExperience}+ Years</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
                   <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
                     <FiCheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Status</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.availability}</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Status</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.availability}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="flex items-start gap-3">
-                  <div className="bg-primary-500/10 dark:bg-primary-400/10 rounded-lg p-2">
-                    <FiGlobe className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
+                    <FiGlobe className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Languages</p>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{profileData.languages.join(', ')}</p>
+                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Languages</p>
+                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.languages.join(', ')}</p>
                   </div>
                 </div>
               </div>
@@ -180,14 +180,14 @@ const AboutPage: React.FC = () => {
         style={{ '--stagger': 3 } as React.CSSProperties}
       >
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/10 text-primary-600 dark:text-primary-400 text-sm font-medium border border-primary-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
             <FiHeart className="w-4 h-4" />
             My Story
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1c1a1c] dark:text-white mb-4">
             Who I Am
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
             Learn more about my journey and what drives my passion
           </p>
         </div>
@@ -196,9 +196,9 @@ const AboutPage: React.FC = () => {
           {bioSections.map((section, index) => (
             <div
               key={index}
-              className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-2xl p-8 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-shadow"
             >
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg ">
+              <p className="text-[#1c1a1c]/80 dark:text-white/80 leading-relaxed text-lg ">
                 {section.trim()}
               </p>
             </div>
@@ -212,14 +212,14 @@ const AboutPage: React.FC = () => {
         style={{ '--stagger': 4 } as React.CSSProperties}
       >
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/10 text-primary-600 dark:text-primary-400 text-sm font-medium border border-primary-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
             <FiAward className="w-4 h-4" />
             Core Skills
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1c1a1c] dark:text-white mb-4">
             Technologies & Tools
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
             The technologies I use to bring ideas to life
           </p>
         </div>
@@ -228,10 +228,10 @@ const AboutPage: React.FC = () => {
           {profileData.skills.map((skill, index) => (
             <div
               key={`${skill.name}-${index}`}
-              className="group flex items-center gap-3 px-6 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-700 hover:border-primary-500/50 dark:hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
+              className="group flex items-center gap-3 px-6 py-3 bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-full border border-black/10 dark:border-white/10 hover:border-green-500/50 dark:hover:border-green-400/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
             >
-              <skill.icon className="w-6 h-6 text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
+              <skill.icon className="w-6 h-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-[#1c1a1c]/80 dark:text-white/80">{skill.name}</span>
             </div>
           ))}
         </div>
@@ -248,12 +248,12 @@ const AboutPage: React.FC = () => {
             <div className="text-white/90 font-medium">Years Experience</div>
           </div>
           <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">50+</div>
-            <div className="text-gray-600 dark:text-gray-300 font-medium">Projects Completed</div>
+            <div className="text-4xl font-bold text-[#1c1a1c] dark:text-white mb-2">50+</div>
+            <div className="text-[#1c1a1c]/70 dark:text-white/70 font-medium">Projects Completed</div>
           </div>
           <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">100+</div>
-            <div className="text-gray-600 dark:text-gray-300 font-medium">Happy Clients</div>
+            <div className="text-4xl font-bold text-[#1c1a1c] dark:text-white mb-2">100+</div>
+            <div className="text-[#1c1a1c]/70 dark:text-white/70 font-medium">Happy Clients</div>
           </div>
         </div>
       </div> */}
@@ -263,23 +263,23 @@ const AboutPage: React.FC = () => {
         className="animated-element animate-fade-in-up mt-20 text-center"
         style={{ '--stagger': 6 } as React.CSSProperties}
       >
-        <div className="bg-gradient-to-r from-primary-500/10 to-blue-500/10 dark:from-primary-400/10 dark:to-cyan-400/10 rounded-3xl p-8 md:p-12 border border-primary-500/20 dark:border-primary-400/20">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 dark:from-green-400/10 dark:to-emerald-400/10 rounded-3xl p-8 md:p-12 border border-green-500/20 dark:border-green-400/20">
+          <h3 className="text-2xl md:text-3xl font-bold text-[#1c1a1c] dark:text-white mb-4">
             Let's Work Together
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-[#1c1a1c]/70 dark:text-white/70 mb-8 max-w-2xl mx-auto">
             I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 hover:-translate-y-0.5"
             >
               Start a Conversation
             </a>
             <a
               href="/projects"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-900 dark:text-white rounded-2xl font-medium border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-[#1c1a1c] dark:text-white rounded-2xl font-medium border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
             >
               View My Work
             </a>
@@ -291,3 +291,4 @@ const AboutPage: React.FC = () => {
 };
 
 export default AboutPage;
+

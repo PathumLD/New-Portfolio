@@ -50,15 +50,15 @@ function DataTable<T extends { id: string }>({
 
     if (loading) {
         return (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-dark-background rounded-xl shadow-sm overflow-hidden">
                 <div className="animate-pulse">
-                    <div className="h-12 bg-gray-100 dark:bg-gray-700" />
+                    <div className="h-12 bg-green-50 dark:bg-green-900/30" />
                     {[...Array(5)].map((_, i) => (
-                        <div key={i} className="h-16 border-t border-gray-200 dark:border-gray-700">
+                        <div key={i} className="h-16 border-t border-black/10 dark:border-white/10">
                             <div className="flex items-center gap-4 p-4">
-                                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/4" />
-                                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/3" />
-                                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/4" />
+                                <div className="h-4 bg-green-100 dark:bg-green-900/40 rounded w-1/4" />
+                                <div className="h-4 bg-green-100 dark:bg-green-900/40 rounded w-1/3" />
+                                <div className="h-4 bg-green-100 dark:bg-green-900/40 rounded w-1/4" />
                             </div>
                         </div>
                     ))}
@@ -69,28 +69,28 @@ function DataTable<T extends { id: string }>({
 
     if (data.length === 0) {
         return (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-                <p className="text-gray-500 dark:text-gray-400">{emptyMessage}</p>
+            <div className="bg-white dark:bg-dark-background rounded-xl shadow-sm p-12 text-center">
+                <p className="text-[#1c1a1c]/60 dark:text-white/60">{emptyMessage}</p>
             </div>
         );
     }
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-dark-background rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead>
-                        <tr className="bg-gray-50 dark:bg-gray-700/50">
+                        <tr className="bg-green-50/50 dark:bg-green-900/20">
                             {columns.map((column) => (
                                 <th
                                     key={column.key as string}
-                                    className="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider"
+                                    className="px-6 py-3 text-left text-xs font-semibold text-[#1c1a1c]/70 dark:text-white/70 uppercase tracking-wider"
                                 >
                                     {column.label}
                                 </th>
                             ))}
                             {(onEdit || onDelete) && (
-                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-right text-xs font-semibold text-[#1c1a1c]/70 dark:text-white/70 uppercase tracking-wider">
                                     Actions
                                 </th>
                             )}
@@ -100,12 +100,12 @@ function DataTable<T extends { id: string }>({
                         {paginatedData.map((item) => (
                             <tr
                                 key={item[keyField] as string}
-                                className="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+                                className="hover:bg-green-50/30 dark:hover:bg-green-900/20 transition-colors"
                             >
                                 {columns.map((column) => (
                                     <td
                                         key={column.key as string}
-                                        className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                                        className="px-6 py-4 text-sm text-[#1c1a1c] dark:text-white"
                                     >
                                         {column.render
                                             ? column.render(item)
@@ -118,7 +118,7 @@ function DataTable<T extends { id: string }>({
                                             {onEdit && (
                                                 <button
                                                     onClick={() => onEdit(item)}
-                                                    className="p-2 rounded-lg text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                                                    className="p-2 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors"
                                                     title="Edit"
                                                 >
                                                     <FiEdit2 className="w-4 h-4" />
@@ -144,8 +144,8 @@ function DataTable<T extends { id: string }>({
 
             {/* Pagination */}
             {totalPages > 1 && (
-                <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center justify-between px-6 py-4 border-t border-black/10 dark:border-white/10">
+                    <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60">
                         Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, data.length)} of{' '}
                         {data.length} entries
                     </p>
@@ -153,17 +153,17 @@ function DataTable<T extends { id: string }>({
                         <button
                             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            className="p-2 rounded-lg border border-black/15 dark:border-white/15 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors"
                         >
                             <FiChevronLeft className="w-4 h-4" />
                         </button>
-                        <span className="text-sm text-gray-600 dark:text-gray-300">
+                        <span className="text-sm text-[#1c1a1c]/70 dark:text-white/70">
                             Page {currentPage} of {totalPages}
                         </span>
                         <button
                             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            className="p-2 rounded-lg border border-black/15 dark:border-white/15 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors"
                         >
                             <FiChevronRight className="w-4 h-4" />
                         </button>
@@ -175,3 +175,5 @@ function DataTable<T extends { id: string }>({
 }
 
 export default DataTable;
+
+

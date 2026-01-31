@@ -25,7 +25,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -65,10 +65,10 @@ const InteractiveAuroraBackground: React.FC = () => {
   return (
     <div ref={containerRef} className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
       <div className="relative w-full h-full">
-        <Blob className="top-[-10%] left-[-25%] w-[80%] h-[80%] bg-purple-400/20 dark:bg-teal-600/20" style={{ transform: 'translate(calc(var(--mouse-x) * -0.1), calc(var(--mouse-y) * -0.1))' }} />
-        <Blob className="bottom-[-10%] right-[-25%] w-[80%] h-[80%] bg-blue-400/20 dark:bg-cyan-600/20 [animation-delay:3s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1))' }} />
-        <Blob className="bottom-[20%] left-[10%] w-[50%] h-[50%] bg-pink-400/10 dark:bg-emerald-600/10 [animation-delay:6s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.05), calc(var(--mouse-y) * -0.05))' }} />
-        <Blob className="top-[10%] right-[10%] w-[40%] h-[40%] bg-teal-400/10 dark:bg-sky-600/10 [animation-delay:9s]" style={{ transform: 'translate(calc(var(--mouse-x) * -0.05), calc(var(--mouse-y) * 0.05))' }} />
+        <Blob className="top-[-10%] left-[-25%] w-[80%] h-[80%] bg-emerald-400/20 dark:bg-emerald-600/20" style={{ transform: 'translate(calc(var(--mouse-x) * -0.1), calc(var(--mouse-y) * -0.1))' }} />
+        <Blob className="bottom-[-10%] right-[-25%] w-[80%] h-[80%] bg-green-400/20 dark:bg-green-600/20 [animation-delay:3s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1))' }} />
+        <Blob className="bottom-[20%] left-[10%] w-[50%] h-[50%] bg-lime-400/10 dark:bg-lime-600/10 [animation-delay:6s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.05), calc(var(--mouse-y) * -0.05))' }} />
+        <Blob className="top-[10%] right-[10%] w-[40%] h-[40%] bg-teal-400/10 dark:bg-emerald-600/10 [animation-delay:9s]" style={{ transform: 'translate(calc(var(--mouse-x) * -0.05), calc(var(--mouse-y) * 0.05))' }} />
       </div>
     </div>
   );
@@ -77,7 +77,7 @@ const InteractiveAuroraBackground: React.FC = () => {
 // Public Layout wrapper component
 const PublicLayout: React.FC = () => {
   return (
-    <div className="bg-gray-50 dark:bg-dark-background text-gray-800 dark:text-gray-200 min-h-screen flex flex-col font-sans transition-colors duration-300 overflow-x-hidden">
+    <div className="bg-white dark:bg-dark-background text-[#1c1a1c] dark:text-white min-h-screen flex flex-col font-sans transition-colors duration-300 overflow-x-hidden">
       <InteractiveAuroraBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12 md:pt-40 md:pb-16">
