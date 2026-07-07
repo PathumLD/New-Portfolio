@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, BrowserRouter, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
@@ -10,7 +11,6 @@ import ProjectsPage from './pages/ProjectsPage';
 import CredentialsPage from './pages/CredentialsPage';
 import CertificationsAwardsPage from './pages/CertificationsAwardsPage';
 import ContactPage from './pages/ContactPage';
-import TutoringPage from './pages/TutoringPage';
 import BlogPage from './pages/BlogPage';
 
 // Admin pages
@@ -37,63 +37,38 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
-const InteractiveAuroraBackground: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      if (containerRef.current) {
-        const { clientX, clientY } = event;
-        const { offsetWidth, offsetHeight } = containerRef.current;
-        const x = (clientX / offsetWidth) * 100;
-        const y = (clientY / offsetHeight) * 100;
-        containerRef.current.style.setProperty('--mouse-x', `${x}%`);
-        containerRef.current.style.setProperty('--mouse-y', `${y}%`);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  const Blob: React.FC<{ className: string; style?: React.CSSProperties }> = ({ className, style }) => {
-    return <div className={`absolute rounded-full animate-aurora ${className}`} style={style}></div>
-  }
-
-  return (
-    <div ref={containerRef} className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-      <div className="relative w-full h-full">
-        <Blob className="top-[-10%] left-[-25%] w-[80%] h-[80%] bg-emerald-400/20 dark:bg-emerald-600/20" style={{ transform: 'translate(calc(var(--mouse-x) * -0.1), calc(var(--mouse-y) * -0.1))' }} />
-        <Blob className="bottom-[-10%] right-[-25%] w-[80%] h-[80%] bg-green-400/20 dark:bg-green-600/20 [animation-delay:3s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1))' }} />
-        <Blob className="bottom-[20%] left-[10%] w-[50%] h-[50%] bg-lime-400/10 dark:bg-lime-600/10 [animation-delay:6s]" style={{ transform: 'translate(calc(var(--mouse-x) * 0.05), calc(var(--mouse-y) * -0.05))' }} />
-        <Blob className="top-[10%] right-[10%] w-[40%] h-[40%] bg-teal-400/10 dark:bg-emerald-600/10 [animation-delay:9s]" style={{ transform: 'translate(calc(var(--mouse-x) * -0.05), calc(var(--mouse-y) * 0.05))' }} />
-      </div>
-    </div>
-  );
-};
-
 // Public Layout wrapper component
 const PublicLayout: React.FC = () => {
+  const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div className="bg-white dark:bg-dark-background text-[#1c1a1c] dark:text-white min-h-screen flex flex-col font-sans transition-colors duration-300 overflow-x-hidden">
-      <InteractiveAuroraBackground />
+    <div className="site-backdrop relative flex min-h-screen flex-col overflow-x-hidden text-zinc-950 transition-colors duration-300 dark:text-white">
+      <div className="grid-overlay pointer-events-none fixed inset-0 -z-10 opacity-70" />
+      <div className="ambient-beam pointer-events-none fixed left-1/2 top-[-10rem] -z-10 h-[34rem] w-[70rem] -translate-x-1/2 opacity-80" />
+      <div className="ambient-beam pointer-events-none fixed bottom-[-18rem] right-[-18rem] -z-10 h-[42rem] w-[52rem] rotate-12 opacity-50" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-white/70 to-transparent dark:from-zinc-950/80" />
       <Navbar />
-      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12 md:pt-40 md:pb-16">
-        <div className="animated-element animate-fade-in-up">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/credentials" element={<CredentialsPage />} />
-            <Route path="/certifications-awards" element={<CertificationsAwardsPage />} />
-            <Route path="/tutoring" element={<TutoringPage />} />
-            <Route path="/tutoring/:gradeId" element={<TutoringPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </div>
+      <main className="mx-auto w-full max-w-7xl flex-grow px-4 pb-16 pt-28 sm:px-6 md:pt-32 lg:px-8">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 18, filter: 'blur(8px)' }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -10, filter: 'blur(6px)' }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Routes location={location}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/credentials" element={<CredentialsPage />} />
+              <Route path="/certifications-awards" element={<CertificationsAwardsPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </motion.div>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

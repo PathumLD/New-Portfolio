@@ -2,7 +2,6 @@ import { ProfileData } from '../types';
 import {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaReact,
   FaFigma,
   FaHtml5,
@@ -15,9 +14,14 @@ import {
   FaBootstrap,
   FaLaravel,
   FaGitAlt,
-  FaProjectDiagram
+  FaProjectDiagram,
+  FaGlobe
 } from 'react-icons/fa';
 import {
+  SiAngular,
+  SiAmazonaws,
+  SiDocker,
+  SiFirebase,
   SiTailwindcss,
   SiTypescript,
   SiC,
@@ -40,21 +44,23 @@ import profile from '../assets/profile.jpg';
 
 export const profileData: ProfileData = {
   name: 'Pathum Dissanayake',
-  title: 'Software Engineer, Designer & Educator',
+  title: 'Full-Stack Software Engineer',
   email: 'pathumlk.diz@gmail.com',
   phone: '+94 76 734 2605',
-  location: 'Kurunegala, Sri Lanka',
+  location: 'Kurunegala, North Western Province, Sri Lanka',
   age: 28,
-  yearsOfExperience: 1,
-  availability: 'Available for opportunities',
+  yearsOfExperience: 2,
+  availability: 'Open to junior and mid-level software engineering roles',
   languages: ['English', 'Sinhala'],
-  education: 'BSc in Computer Science, University of Colombo',
+  education: 'BSc in Information Systems, University of Colombo School of Computing',
   profilePicture: profile,
-  shortBio: 'A creative professional passionate about building beautiful, functional applications and sharing knowledge with others.',
+  shortBio: 'Full-stack software engineer building scalable web applications with React, Next.js, Node.js, ASP.NET Core, Java, and modern database platforms.',
   longBio: `
-    I am a multi-disciplinary professional with a deep passion for technology, design, and education. As a Software Engineer, I specialize in front-end development, crafting intuitive and performant user interfaces with modern technologies like React and TypeScript. My journey into development was fueled by a love for visual aesthetics, which I also express through my work as a Graphic Designer, creating compelling brand identities and digital art.
+    I am a Full Stack Software Engineer with hands-on experience designing, building, and deploying production-ready web applications using modern frontend and backend technologies. I work across the software development lifecycle, from system design and database modeling to API development, frontend implementation, testing, and cloud deployment.
     
-    Beyond building and designing, I believe in the power of sharing knowledge. I maintain a tech blog where I write about the latest trends in web development and design, and I have experience as a part-time coding instructor, helping aspiring developers start their careers. My unique blend of technical expertise, design sensibility, and communication skills allows me to bridge the gap between complex engineering challenges and user-centric design.
+    My recent work includes a full-featured AI-powered job portal, modular ERP systems, a resume management platform, and secure role-based applications. I have worked with Next.js, React, TypeScript, Node.js, Express.js, ASP.NET Core, Spring Boot, Prisma, Supabase, PostgreSQL, MongoDB, and SQL Server, with a focus on clean code, maintainable architecture, and reliable delivery.
+
+    Alongside engineering, I teach Information and Communication Technology and bring a strong UI/UX and graphic design background into my work. That mix helps me build software that is technically robust, understandable, and comfortable for real users.
     `,
   skills: [
     { name: 'HTML', icon: FaHtml5 },
@@ -67,9 +73,11 @@ export const profileData: ProfileData = {
     { name: 'C#', icon: SiCsharp },
     { name: 'Python', icon: FaPython },
     { name: 'React', icon: FaReact },
+    { name: 'Next.js', icon: FaReact },
+    { name: 'Angular.js', icon: SiAngular },
     { name: 'Node.js', icon: FaNodeJs },
     { name: 'Express.js', icon: SiExpress },
-    { name: 'ASP.NET', icon: SiDotnet },
+    { name: 'ASP.NET Core', icon: SiDotnet },
     { name: 'Spring Boot', icon: SiSpringboot },
     { name: 'Tailwind CSS', icon: SiTailwindcss },
     { name: 'Bootstrap', icon: FaBootstrap },
@@ -80,6 +88,10 @@ export const profileData: ProfileData = {
     { name: 'MongoDB', icon: SiMongodb },
     { name: 'PostgreSQL', icon: SiPostgresql },
     { name: 'MS SQL', icon: SiMicrosoftsqlserver },
+    { name: 'Supabase', icon: SiPostgresql },
+    { name: 'Firebase', icon: SiFirebase },
+    { name: 'Docker', icon: SiDocker },
+    { name: 'AWS', icon: SiAmazonaws },
     { name: 'Figma', icon: FaFigma },
     { name: 'MS Office', icon: SiMicrosoft },
     { name: 'Photoshop', icon: SiAdobephotoshop },
@@ -90,8 +102,8 @@ export const profileData: ProfileData = {
     { name: 'Draw.io', icon: FaProjectDiagram },
   ],
   socials: [
-    { name: 'GitHub', url: 'https://github.com', icon: FaGithub },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: FaLinkedin },
-    { name: 'Twitter', url: 'https://twitter.com', icon: FaTwitter },
+    { name: 'GitHub', url: 'https://github.com/PathumLD', icon: FaGithub },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/pathumld', icon: FaLinkedin },
+    { name: 'Portfolio', url: 'https://pathumld.vercel.app/', icon: FaGlobe },
   ],
 };

@@ -1,90 +1,103 @@
-
 import React from 'react';
+import { FiBriefcase, FiCalendar, FiMapPin } from 'react-icons/fi';
 import TabbedContent from '../components/TabbedContent';
+import { Pill, SectionIntro, Surface } from '../components/PublicUI';
 import { education } from '../data/education';
 import { experience } from '../data/experience';
 import { volunteering } from '../data/volunteering';
 import { Education, Experience, Volunteering } from '../types';
 
-const InfoCard: React.FC<{ item: Education | Experience | Volunteering; alignment: 'left' | 'right' }> = ({ item, alignment }) => (
-  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-black/5 dark:border-white/10 w-full text-left">
-    {'degree' in item && <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.degree}</h3>}
-    {'role' in item && <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.role}</h3>}
+type TimelineItem = Education | Experience | Volunteering;
 
-    <p className="text-md font-semibold text-green-600 dark:text-green-400 mt-1">
-      {'institution' in item && item.institution}
-      {'company' in item && item.company}
-      {'organization' in item && item.organization}
-    </p>
+const getTitle = (item: TimelineItem) => {
+  if ('degree' in item) return item.degree;
+  return item.role;
+};
 
-    <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60 my-2">{item.period}</p>
-    <p className="text-[#1c1a1c]/80 dark:text-white/80">{item.description}</p>
-    {'skills' in item && item.skills && (
-      <div className={`flex flex-wrap gap-2 mt-4 ${alignment === 'right' ? 'sm:justify-end' : 'justify-start'}`}>
-        {item.skills.map(skill => (
-          <span key={skill} className="bg-primary-100/30 dark:bg-primary-900/20 text-[#1c1a1c]/90 dark:text-white/90 text-xs font-medium px-2.5 py-0.5 rounded-full">{skill}</span>
-        ))}
-      </div>
-    )}
-  </div>
-);
+const getOrganization = (item: TimelineItem) => {
+  if ('institution' in item) return item.institution;
+  if ('company' in item) return item.company;
+  return item.organization;
+};
 
-const Timeline: React.FC<{ items: (Education | Experience | Volunteering)[] }> = ({ items }) => (
-  <div className="relative">
-    {/* Vertical line */}
-    <div className="absolute left-4 sm:left-1/2 top-1 h-full w-0.5 bg-green-200 dark:bg-green-800 transform sm:-translate-x-1/2"></div>
-
-    <div className="space-y-12">
-      {items.map((item, index) => (
-        <div
-          key={item.id}
-          className="relative animated-element animate-fade-in-up"
-          style={{ '--stagger': index + 1 } as React.CSSProperties}
-        >
-          <div className="sm:flex items-start">
-            {/* Dot */}
-            <div className="hidden sm:block absolute left-1/2 top-1 w-5 h-5 rounded-full bg-green-500 border-4 border-white dark:border-dark-background transform -translate-x-1/2 z-10"></div>
-            <div className="sm:hidden absolute left-4 top-1 w-5 h-5 rounded-full bg-green-500 border-4 border-white dark:border-dark-background transform -translate-x-1/2 z-10"></div>
-
-            {/* Content Card */}
-            <div className={`w-full sm:w-1/2 ${index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8 sm:ml-auto'}`}>
-              <InfoCard item={item} alignment={index % 2 !== 0 ? 'left' : 'right'} />
-            </div>
-          </div>
-          {/* Mobile view needs a different structure to align with the line */}
-          <div className="sm:hidden -mt-[calc(100%-1.25rem)] ml-10">
-            <InfoCard item={item} alignment='left' />
-          </div>
-        </div>
-      ))}
+const TimelineCard: React.FC<{ item: TimelineItem; index: number }> = ({ item, index }) => (
+  <div className="relative grid gap-4 pl-9 md:grid-cols-[10rem_1fr] md:pl-0">
+    <div className="absolute left-2 top-2 h-full w-px bg-zinc-200 dark:bg-white/10 md:hidden" />
+    <span className="absolute left-0 top-1 grid h-5 w-5 place-items-center border border-emerald-500 bg-white dark:bg-zinc-950 md:left-[10.45rem]">
+      <span className="h-2 w-2 bg-emerald-500" />
+    </span>
+    <div className="hidden border-r border-zinc-200 pr-7 text-right dark:border-white/10 md:block">
+      <p className="text-sm font-semibold text-zinc-950 dark:text-white">{item.period}</p>
+      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Step {index + 1}</p>
     </div>
+    <Surface className="p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">{getTitle(item)}</h3>
+          <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+            <FiMapPin className="h-4 w-4" />
+            {getOrganization(item)}
+          </p>
+        </div>
+        <Pill tone="amber">
+          <FiCalendar className="mr-1 h-3.5 w-3.5" />
+          {item.period}
+        </Pill>
+      </div>
+      <p className="mt-4 text-sm leading-7 text-zinc-600 dark:text-zinc-300">{item.description}</p>
+      {'skills' in item && item.skills && (
+        <div className="mt-5 flex flex-wrap gap-2">
+          {item.skills.map((skill) => (
+            <Pill key={skill}>{skill}</Pill>
+          ))}
+        </div>
+      )}
+    </Surface>
   </div>
 );
 
+const Timeline: React.FC<{ items: TimelineItem[] }> = ({ items }) => (
+  <div className="space-y-6">
+    {items.map((item, index) => (
+      <TimelineCard key={item.id} item={item} index={index} />
+    ))}
+  </div>
+);
 
 const CredentialsPage: React.FC = () => {
   const tabs = [
-    {
-      label: 'Experience',
-      content: <Timeline items={experience} />,
-    },
-    {
-      label: 'Education',
-      content: <Timeline items={education} />,
-    },
-    {
-      label: 'Volunteering',
-      content: <Timeline items={volunteering} />,
-    },
+    { label: 'Experience', content: <Timeline items={experience} /> },
+    { label: 'Education', content: <Timeline items={education} /> },
+    { label: 'Volunteering', content: <Timeline items={volunteering} /> },
   ];
 
   return (
-    <div>
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white sm:text-5xl">My Journey</h1>
-        <p className="mt-4 text-xl text-[#1c1a1c]/70 dark:text-white/70">My professional and academic journey.</p>
-      </div>
-      <div className="max-w-4xl mx-auto">
+    <div className="space-y-14">
+      <SectionIntro
+        eyebrow="Journey"
+        title="A timeline of engineering, design, teaching, and service."
+        description="A cleaner view of the professional and academic path behind the work."
+        align="center"
+      />
+
+      <Surface className="grid gap-5 p-5 md:grid-cols-3">
+        {[
+          ['Experience', `${experience.length} roles`],
+          ['Education', `${education.length} records`],
+          ['Volunteering', `${volunteering.length} activities`],
+        ].map(([label, value]) => (
+          <div key={label} className="border-l-2 border-emerald-500 pl-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">{label}</p>
+            <p className="mt-2 text-2xl font-semibold text-zinc-950 dark:text-white">{value}</p>
+          </div>
+        ))}
+      </Surface>
+
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-5 flex items-center gap-3">
+          <FiBriefcase className="h-6 w-6 text-emerald-500" />
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Timeline</p>
+        </div>
         <TabbedContent tabs={tabs} />
       </div>
     </div>
@@ -92,5 +105,3 @@ const CredentialsPage: React.FC = () => {
 };
 
 export default CredentialsPage;
-
-

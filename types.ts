@@ -16,7 +16,6 @@ export interface Project {
   description: string;
   tags: string[];
   liveUrl?: string;
-  repoUrl?: string;
 }
 
 export interface Certification {

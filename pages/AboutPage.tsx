@@ -1,294 +1,118 @@
 import React from 'react';
-import { profileData } from '../data/profile';
-import { FiAward, FiHeart, FiZap, FiMapPin, FiBriefcase, FiClock, FiGlobe, FiMail, FiPhone, FiCheckCircle } from 'react-icons/fi';
+import { FiBriefcase, FiCheckCircle, FiGlobe, FiHeart, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 import { HiAcademicCap } from 'react-icons/hi';
+import { profileData } from '../data/profile';
+import { Pill, PrimaryButton, SecondaryButton, SectionIntro, Surface } from '../components/PublicUI';
+import sideProfile from '../assets/Side.jpg';
+
+const detailCards = [
+  { label: 'Email', value: profileData.email, icon: FiMail, href: `mailto:${profileData.email}` },
+  { label: 'Phone', value: profileData.phone || 'Available on request', icon: FiPhone, href: profileData.phone ? `tel:${profileData.phone}` : undefined },
+  { label: 'Location', value: profileData.location, icon: FiMapPin },
+  { label: 'Experience', value: `${profileData.yearsOfExperience}+ Years`, icon: FiBriefcase },
+  { label: 'Status', value: profileData.availability, icon: FiCheckCircle },
+  { label: 'Languages', value: profileData.languages.join(', '), icon: FiGlobe },
+];
 
 const AboutPage: React.FC = () => {
-  const bioSections = profileData.longBio.trim().split('\n\n').filter(section => section.trim());
+  const bioSections = profileData.longBio.trim().split('\n\n').filter(Boolean);
 
   return (
-    <div className="max-w-6xl mx-auto">
-      {/* Header Section */}
-      <div
-        className="animated-element animate-fade-in-up text-center mb-16"
-        style={{ '--stagger': 1 } as React.CSSProperties}
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
-          <FiHeart className="w-4 h-4" />
-          Get to know me
-        </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#1c1a1c] dark:text-white mb-4">
-          About Me
-        </h1>
-        <p className="text-xl text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
-          A little bit about my journey, passions, and what drives me forward.
-        </p>
-      </div>
+    <div className="space-y-20">
+      <SectionIntro
+        eyebrow="About"
+        title="A practical builder with a strong visual instinct."
+        description="I work across software engineering, design, and education, bringing structure to ideas without losing the human side of the experience."
+        align="center"
+      />
 
-      {/* Profile Overview Section */}
-      <div
-        className="animated-element animate-fade-in-up mb-20"
-        style={{ '--stagger': 2 } as React.CSSProperties}
-      >
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-          {/* Profile Image */}
-          <div className="lg:col-span-2">
-            <div className="relative max-w-sm mx-auto">
-              {/* Gradient Background */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-400 dark:from-green-500 dark:to-emerald-500 rounded-3xl blur-2xl opacity-20"></div>
-
-              <div className="relative">
-                <div className="aspect-[3/4] rounded-3xl overflow-hidden border-4 mt-10 border-white/50 dark:border-gray-800/50 shadow-2xl">
-                  <img
-                    src="./assets/Side.png"
-                    alt={profileData.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Decorative Elements */}
-                <div className="absolute -top-3 -right-3 bg-gradient-to-br from-green-500 to-emerald-500 dark:from-green-400 dark:to-emerald-400 rounded-2xl p-4 shadow-xl">
-                  <FiZap className="w-6 h-6 text-white" />
-                </div>
-                <div className="absolute -bottom-3 -left-3 bg-white/80 dark:bg-dark-background/80 backdrop-blur-md rounded-2xl px-4 py-2 shadow-xl border border-green-200 dark:border-green-700">
-                  <p className="text-sm font-bold text-[#1c1a1c] dark:text-white">{profileData.name}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bio and Details */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Name and Title */}
-            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 dark:from-green-400/10 dark:to-emerald-400/10 backdrop-blur-sm rounded-2xl p-6 border border-green-500/20 dark:border-green-400/20 shadow-lg">
-              <h2 className="text-3xl font-bold text-[#1c1a1c] dark:text-white mb-2">{profileData.name}</h2>
-              <p className="text-lg text-green-600 dark:text-green-400 font-medium mb-4">{profileData.title}</p>
-              <p className="text-[#1c1a1c]/80 dark:text-white/80 leading-relaxed">{profileData.shortBio}</p>
-            </div>
-
-            {/* Contact & Education Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiMail className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Email</p>
-                    <a href={`mailto:${profileData.email}`} className="text-sm font-semibold text-[#1c1a1c] dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-all">
-                      {profileData.email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiPhone className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Phone</p>
-                    <a href={`tel:${profileData.phone}`} className="text-sm font-semibold text-[#1c1a1c] dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                      {profileData.phone}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-2">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <HiAcademicCap className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Education</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.education}</p>
-                  </div>
-                </div>
-              </div>
-              {/* <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 col-span-1 sm:col-span-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <HiAcademicCap className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Education</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.education}</p>
-                  </div>
-                </div>
-              </div> */}
-            </div>
-
-            {/* Quick Info Cards - Moved from left side */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiMapPin className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Location</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.location}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiBriefcase className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Experience</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.yearsOfExperience}+ Years</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiCheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Status</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.availability}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/10 dark:bg-green-400/10 rounded-lg p-2">
-                    <FiGlobe className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#1c1a1c]/60 dark:text-white/60 font-medium mb-1">Languages</p>
-                    <p className="text-sm font-semibold text-[#1c1a1c] dark:text-white">{profileData.languages.join(', ')}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* About Me Story */}
-      <div
-        className="animated-element animate-fade-in-up mb-20"
-        style={{ '--stagger': 3 } as React.CSSProperties}
-      >
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
-            <FiHeart className="w-4 h-4" />
-            My Story
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1c1a1c] dark:text-white mb-4">
-            Who I Am
-          </h2>
-          <p className="text-lg text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
-            Learn more about my journey and what drives my passion
-          </p>
+      <section className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="relative">
+          <div className="absolute -left-4 top-8 h-28 w-28 border border-emerald-500/25 bg-emerald-500/10" />
+          <Surface className="relative overflow-hidden p-3">
+            <img src={sideProfile} alt={profileData.name} className="aspect-[4/5] w-full object-cover grayscale transition duration-500 hover:grayscale-0" />
+          </Surface>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
+          <Surface className="p-6">
+            <Pill tone="emerald">{profileData.title}</Pill>
+            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{profileData.name}</h2>
+            <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{profileData.shortBio}</p>
+            <div className="mt-6 border-l-2 border-emerald-500 pl-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Education</p>
+              <p className="mt-2 text-lg font-semibold text-zinc-950 dark:text-white">{profileData.education}</p>
+            </div>
+          </Surface>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {detailCards.map((detail) => (
+              <Surface key={detail.label} className="p-5">
+                <div className="flex items-start gap-3">
+                  <detail.icon className="mt-1 h-5 w-5 shrink-0 text-emerald-500" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">{detail.label}</p>
+                    {detail.href ? (
+                      <a href={detail.href} className="mt-1 block break-words text-sm font-semibold text-zinc-950 transition hover:text-emerald-600 dark:text-white dark:hover:text-emerald-300">
+                        {detail.value}
+                      </a>
+                    ) : (
+                      <p className="mt-1 text-sm font-semibold text-zinc-950 dark:text-white">{detail.value}</p>
+                    )}
+                  </div>
+                </div>
+              </Surface>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <SectionIntro eyebrow="Story" title="The work is a mix of logic, taste, and teaching." />
+        <div className="grid gap-4">
           {bioSections.map((section, index) => (
-            <div
-              key={index}
-              className="bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-2xl p-8 border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl transition-shadow"
-            >
-              <p className="text-[#1c1a1c]/80 dark:text-white/80 leading-relaxed text-lg ">
-                {section.trim()}
-              </p>
-            </div>
+            <Surface key={index} className="p-6">
+              <div className="flex gap-5">
+                <span className="mt-2 h-2 w-2 shrink-0 bg-emerald-500" />
+                <p className="text-base leading-8 text-zinc-600 dark:text-zinc-300">{section.trim()}</p>
+              </div>
+            </Surface>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Skills Section */}
-      <div
-        className="animated-element animate-fade-in-up pb-20"
-        style={{ '--stagger': 4 } as React.CSSProperties}
-      >
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 dark:bg-green-400/10 text-green-600 dark:text-green-400 text-sm font-medium border border-primary-500/20 mb-6">
-            <FiAward className="w-4 h-4" />
-            Core Skills
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1c1a1c] dark:text-white mb-4">
-            Technologies & Tools
-          </h2>
-          <p className="text-lg text-[#1c1a1c]/70 dark:text-white/70 max-w-2xl mx-auto">
-            The technologies I use to bring ideas to life
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-4">
+      <section>
+        <SectionIntro eyebrow="Core skills" title="A broad toolkit, grouped by practical use." />
+        <div className="flex flex-wrap gap-2">
           {profileData.skills.map((skill, index) => (
-            <div
-              key={`${skill.name}-${index}`}
-              className="group flex items-center gap-3 px-6 py-3 bg-white/50 dark:bg-dark-background/50 backdrop-blur-sm rounded-full border border-black/10 dark:border-white/10 hover:border-green-500/50 dark:hover:border-green-400/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
-            >
-              <skill.icon className="w-6 h-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-[#1c1a1c]/80 dark:text-white/80">{skill.name}</span>
+            <div key={`${skill.name}-${index}`} className="inline-flex items-center gap-2 border border-zinc-200 bg-white/70 px-3 py-2 text-sm font-medium text-zinc-700 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+              <skill.icon className="h-4 w-4 text-emerald-500" />
+              {skill.name}
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Stats/Highlights Section */}
-      {/* <div
-        className="animated-element animate-fade-in-up mt-20"
-        style={{ '--stagger': 5 } as React.CSSProperties}
-      >
-        <div className="grid sm:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-primary-500 to-blue-500 dark:from-primary-600 dark:to-cyan-600 rounded-2xl p-8 text-white shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl font-bold mb-2">{profileData.yearsOfExperience}+</div>
-            <div className="text-white/90 font-medium">Years Experience</div>
+      <Surface className="p-6 md:p-8">
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <div className="flex items-center gap-3">
+              <FiHeart className="h-6 w-6 text-emerald-500" />
+              <Pill tone="cyan">Collaboration</Pill>
+            </div>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">Let&apos;s work on something useful.</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+              I&apos;m open to software roles, design-heavy builds, and teaching opportunities.
+            </p>
           </div>
-          <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl font-bold text-[#1c1a1c] dark:text-white mb-2">50+</div>
-            <div className="text-[#1c1a1c]/70 dark:text-white/70 font-medium">Projects Completed</div>
-          </div>
-          <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl font-bold text-[#1c1a1c] dark:text-white mb-2">100+</div>
-            <div className="text-[#1c1a1c]/70 dark:text-white/70 font-medium">Happy Clients</div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <PrimaryButton href="/contact">Contact me</PrimaryButton>
+            <SecondaryButton href="/projects">View work</SecondaryButton>
           </div>
         </div>
-      </div> */}
-
-      {/* Call to Action */}
-      <div
-        className="animated-element animate-fade-in-up mt-20 text-center"
-        style={{ '--stagger': 6 } as React.CSSProperties}
-      >
-        <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 dark:from-green-400/10 dark:to-emerald-400/10 rounded-3xl p-8 md:p-12 border border-green-500/20 dark:border-green-400/20">
-          <h3 className="text-2xl md:text-3xl font-bold text-[#1c1a1c] dark:text-white mb-4">
-            Let's Work Together
-          </h3>
-          <p className="text-[#1c1a1c]/70 dark:text-white/70 mb-8 max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-2xl font-medium transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 hover:-translate-y-0.5"
-            >
-              Start a Conversation
-            </a>
-            <a
-              href="/projects"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-[#1c1a1c] dark:text-white rounded-2xl font-medium border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
-            >
-              View My Work
-            </a>
-          </div>
-        </div>
-      </div>
+      </Surface>
     </div>
   );
 };
 
 export default AboutPage;
-

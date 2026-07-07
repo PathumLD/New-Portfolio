@@ -16,5 +16,9 @@ View your app in AI Studio: https://ai.studio/apps/drive/1jGdbcIVv2XD9B0iysbMmJp
 1. Install dependencies:
    `npm install`
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+3. Set the Resend contact form variables in your local/deployment environment:
+   `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `CONTACT_EMAIL_TO`
+4. Run the app:
    `npm run dev`
+
+The contact form posts to `/api/contact`, which needs a serverless/API runtime such as Vercel Functions. Use `vercel dev` for local end-to-end email testing.

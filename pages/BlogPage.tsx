@@ -1,46 +1,66 @@
 import React from 'react';
+import { FiExternalLink } from 'react-icons/fi';
 import { blogs } from '../data/blogs';
 import { Blog } from '../types';
-import { FiExternalLink } from 'react-icons/fi';
+import { Pill, SectionIntro, SmartLink, Surface } from '../components/PublicUI';
 
-const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => (
-  <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/20 transform hover:-translate-y-1 flex flex-col h-full">
-    <div className="relative overflow-hidden">
-        <img src={blog.thumbnail} alt={blog.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+const BlogCard: React.FC<{ blog: Blog; featured?: boolean }> = ({ blog, featured = false }) => (
+  <Surface className={`group overflow-hidden ${featured ? 'lg:grid lg:grid-cols-[1.05fr_0.95fr]' : 'flex h-full flex-col'}`}>
+    <div className={`overflow-hidden bg-zinc-900 ${featured ? 'min-h-[22rem]' : 'aspect-[16/10]'}`}>
+      <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
     </div>
-    <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold mb-2 text-[#1c1a1c] dark:text-white">{blog.title}</h3>
-      <p className="text-[#1c1a1c]/70 dark:text-white/70 mb-4 text-sm flex-grow">{blog.description}</p>
-      <div className="mt-auto">
-        <div className="flex flex-wrap gap-2 mb-4">
-            {blog.tags.map(tag => (
-            <span key={tag} className="bg-green-100/50 dark:bg-green-900/50 text-green-800 dark:text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">{tag}</span>
-            ))}
-        </div>
-        <div className="flex justify-end space-x-4">
-            <a href={blog.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded-full shadow-md transition-all hover:scale-105">
-                Read More
-                <FiExternalLink className="w-4 h-4" />
-            </a>
-        </div>
+    <div className="flex flex-1 flex-col p-5 md:p-6">
+      <div className="flex flex-wrap gap-2">
+        {blog.tags.map((tag, index) => (
+          <Pill key={tag} tone={index === 0 ? 'emerald' : 'neutral'}>
+            {tag}
+          </Pill>
+        ))}
       </div>
+      <h2 className={`${featured ? 'text-3xl md:text-4xl' : 'text-2xl'} mt-5 font-semibold tracking-tight text-zinc-950 dark:text-white`}>
+        {blog.title}
+      </h2>
+      <p className="mt-4 flex-1 text-sm leading-7 text-zinc-600 dark:text-zinc-300">{blog.description}</p>
+      <SmartLink href={blog.url} external className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+        Read article
+        <FiExternalLink className="h-4 w-4" />
+      </SmartLink>
     </div>
-  </div>
+  </Surface>
 );
 
-
 const BlogPage: React.FC = () => {
-  return (
-    <div>
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white sm:text-5xl">My Blog</h1>
-        <p className="mt-4 text-xl text-[#1c1a1c]/70 dark:text-white/70">Sharing my thoughts on technology, design, and more.</p>
+  const [featuredBlog, ...restBlogs] = blogs;
+
+  if (!featuredBlog) {
+    return (
+      <div className="space-y-14">
+        <SectionIntro
+          eyebrow="Blog"
+          title="Writing about development, design, and better digital products."
+          description="No verified published articles were listed in the provided documents yet."
+          align="center"
+        />
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogs.map((blog, index) => (
-            <div key={blog.id} className="animated-element animate-fade-in-up" style={{ '--stagger': index + 1 } as React.CSSProperties}>
-                <BlogCard blog={blog} />
-            </div>
+    );
+  }
+
+  return (
+    <div className="space-y-14">
+      <SectionIntro
+        eyebrow="Blog"
+        title="Writing about development, design, and better digital products."
+        description="Short notes and guides from the intersection of technical implementation and visual craft."
+        align="center"
+      />
+
+      {featuredBlog && <BlogCard blog={featuredBlog} featured />}
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {restBlogs.map((blog, index) => (
+          <div key={blog.id} className="animated-element animate-fade-in-up" style={{ '--stagger': index + 1 } as React.CSSProperties}>
+            <BlogCard blog={blog} />
+          </div>
         ))}
       </div>
     </div>
@@ -48,4 +68,3 @@ const BlogPage: React.FC = () => {
 };
 
 export default BlogPage;
-

@@ -1,58 +1,84 @@
-
 import React from 'react';
+import { FiAward, FiExternalLink } from 'react-icons/fi';
 import TabbedContent from '../components/TabbedContent';
-import { certifications } from '../data/certifications';
 import { awards } from '../data/awards';
-import { Certification, Award } from '../types';
+import { certifications } from '../data/certifications';
+import { Award, Certification } from '../types';
+import { Pill, SectionIntro, SmartLink, Surface } from '../components/PublicUI';
 
-const CertAwardCard: React.FC<{ item: Certification | Award }> = ({ item }) => (
-    <div className="bg-white/30 dark:bg-dark-background/30 backdrop-blur-lg p-6 rounded-2xl shadow-lg mb-6 transition-all hover:shadow-xl border border-black/5 dark:border-white/10">
-        <div className="flex justify-between items-start">
-            <div>
-                <h3 className="text-xl font-bold text-[#1c1a1c] dark:text-white">{item.title}</h3>
-                <p className="text-md text-[#1c1a1c]/70 dark:text-white/70 mt-1">{item.issuer}</p>
-                <p className="text-sm text-[#1c1a1c]/60 dark:text-white/60 mt-1">{item.date}</p>
-            </div>
-            {'credentialUrl' in item && item.credentialUrl && (
-                <a href={item.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-200 flex-shrink-0 ml-4 transition-colors">
-                    View Credential
-                </a>
-            )}
+const AchievementCard: React.FC<{ item: Certification | Award; index: number }> = ({ item, index }) => (
+  <Surface className="p-5">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex gap-4">
+        <span className="grid h-10 w-10 shrink-0 place-items-center border border-emerald-500/30 bg-emerald-500/10 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div>
+          <h3 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">{item.title}</h3>
+          <p className="mt-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">{item.issuer}</p>
+          {'description' in item && <p className="mt-4 text-sm leading-7 text-zinc-600 dark:text-zinc-300">{item.description}</p>}
         </div>
-        {'description' in item && <p className="text-gray-700 dark:text-gray-300 mt-4">{item.description}</p>}
-    </div>
-);
-
-const CertsAwardsList: React.FC<{ items: (Certification | Award)[] }> = ({ items }) => (
-  <div>
-    {items.map((item, index) => (
-      <div key={item.id} className="animated-element animate-fade-in-up" style={{ '--stagger': index + 1 } as React.CSSProperties}>
-        <CertAwardCard item={item} />
       </div>
-    ))}
-  </div>
+      <div className="flex shrink-0 flex-wrap items-center gap-3">
+        <Pill tone="amber">{item.date}</Pill>
+        {'credentialUrl' in item && item.credentialUrl && (
+          <SmartLink href={item.credentialUrl} external className="inline-flex items-center gap-2 border-b border-emerald-500 pb-1 text-sm font-semibold text-zinc-950 dark:text-white">
+            View
+            <FiExternalLink className="h-4 w-4" />
+          </SmartLink>
+        )}
+      </div>
+    </div>
+  </Surface>
 );
 
+const AchievementList: React.FC<{ items: (Certification | Award)[] }> = ({ items }) => {
+  if (items.length === 0) {
+    return <Surface className="p-8 text-center text-zinc-600 dark:text-zinc-300">No verified entries listed in the provided documents yet.</Surface>;
+  }
+
+  return (
+    <div className="grid gap-4">
+      {items.map((item, index) => (
+        <AchievementCard key={item.id} item={item} index={index} />
+      ))}
+    </div>
+  );
+};
 
 const CertificationsAwardsPage: React.FC = () => {
   const tabs = [
-    {
-      label: 'Certifications',
-      content: <CertsAwardsList items={certifications} />,
-    },
-    {
-      label: 'Awards',
-      content: <CertsAwardsList items={awards} />,
-    },
+    { label: 'Certifications', content: <AchievementList items={certifications} /> },
+    { label: 'Awards', content: <AchievementList items={awards} /> },
   ];
 
   return (
-    <div>
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight text-[#1c1a1c] dark:text-white sm:text-5xl">Achievements</h1>
-        <p className="mt-4 text-xl text-[#1c1a1c]/70 dark:text-white/70">My certifications and awards.</p>
-      </div>
-      <div className="max-w-4xl mx-auto">
+    <div className="space-y-14">
+      <SectionIntro
+        eyebrow="Achievements"
+        title="Certifications, awards, and proof of continuous learning."
+        description="A concise record of credentials and recognition across development, design, and professional growth."
+        align="center"
+      />
+
+      <Surface className="grid gap-5 p-5 md:grid-cols-3">
+        <div className="md:col-span-1">
+          <FiAward className="h-8 w-8 text-amber-500" />
+          <h2 className="mt-5 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white">Achievement archive</h2>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 md:col-span-2">
+          <div className="border-l-2 border-emerald-500 pl-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Certifications</p>
+            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{certifications.length}</p>
+          </div>
+          <div className="border-l-2 border-cyan-500 pl-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Awards</p>
+            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{awards.length}</p>
+          </div>
+        </div>
+      </Surface>
+
+      <div className="mx-auto max-w-5xl">
         <TabbedContent tabs={tabs} />
       </div>
     </div>
@@ -60,4 +86,3 @@ const CertificationsAwardsPage: React.FC = () => {
 };
 
 export default CertificationsAwardsPage;
-

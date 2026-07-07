@@ -4,16 +4,9 @@ import { Volunteering } from '../types';
 export const volunteering: Volunteering[] = [
   {
     id: 1,
-    organization: 'Tech for Good',
-    role: 'Volunteer Web Developer',
-    period: 'Summer 2021',
-    description: 'Helped a non-profit organization redesign and develop their website, improving their online presence and making it easier for users to donate.',
-  },
-  {
-    id: 2,
-    organization: 'Hour of Code',
-    role: 'Event Facilitator',
-    period: 'December 2020',
-    description: 'Volunteered at a local school to introduce young students to the basics of programming through fun and interactive activities.',
+    organization: 'UCSC ISACA Student Group',
+    role: 'Treasurer',
+    period: 'June 2023 - May 2024',
+    description: 'Served as Treasurer of the UCSC ISACA Student Group, supporting student-group financial responsibilities and organizational activities during the 2023-2024 term.',
   },
 ];
