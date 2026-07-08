@@ -12,7 +12,7 @@ const navLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Achievements', path: '/certifications-awards' },
   { name: 'Tutoring', path: 'https://class.pathumld.com/', external: true },
-  { name: 'Blog', path: '/blog' },
+  //{ name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ];
 

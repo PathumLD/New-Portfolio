@@ -15,7 +15,6 @@ type ContactPayload = {
     name?: unknown;
     size?: unknown;
     type?: unknown;
-    content?: unknown;
   } | null;
 };
 
@@ -32,7 +31,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const contactEmailTo = process.env.CONTACT_EMAIL_TO || 'pathumld.career@gmail.com';
 const contactEmailFrom = process.env.RESEND_FROM_EMAIL || 'Portfolio Contact <contact@pathumld.com>';
-const maxAttachmentSize = 2 * 1024 * 1024;
 
 function sendJson(res: ServerResponse, statusCode: number, payload: Record<string, unknown>) {
   res.statusCode = statusCode;
@@ -55,6 +53,10 @@ function escapeHtml(value: string) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function getSubjectName(name: string) {
+  return name.replace(/[^\p{L}\p{N}\s.'-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 60) || 'Website visitor';
 }
 
 function formatFileSize(size: number) {
@@ -94,27 +96,6 @@ async function readJsonBody(req: RequestWithBody) {
 
   const rawBody = Buffer.concat(chunks).toString('utf8');
   return rawBody ? JSON.parse(rawBody) : {};
-}
-
-function getEmailAttachment(attachment: NormalizedContactPayload['attachment']) {
-  const filename = asString(attachment?.name);
-  const content = asString(attachment?.content);
-  const contentType = asString(attachment?.type);
-  const size = typeof attachment?.size === 'number' ? attachment.size : 0;
-
-  if (!filename || !content) {
-    return null;
-  }
-
-  if (size > maxAttachmentSize) {
-    throw new Error('Attachment is too large.');
-  }
-
-  return {
-    filename,
-    content,
-    contentType: contentType || undefined,
-  };
 }
 
 function buildEmailContent(payload: NormalizedContactPayload) {
@@ -223,16 +204,14 @@ export default async function handler(req: RequestWithBody, res: ServerResponse)
       attachment: payload.attachment,
     };
     const { html, text } = buildEmailContent(normalizedPayload);
-    const emailAttachment = getEmailAttachment(normalizedPayload.attachment);
 
     const { error } = await resend.emails.send({
       from: contactEmailFrom,
       to: [contactEmailTo],
       replyTo: email,
-      subject: `Portfolio contact: ${name}`,
+      subject: `Portfolio contact: ${getSubjectName(name)}`,
       html,
       text,
-      attachments: emailAttachment ? [emailAttachment] : undefined,
     });
 
     if (error) {

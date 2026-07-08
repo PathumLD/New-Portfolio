@@ -10,39 +10,20 @@ const fieldIconClass = 'pointer-events-none absolute left-3 top-1/2 h-4 w-4 -tra
 const textareaIconClass = 'pointer-events-none absolute left-3 top-4 h-4 w-4 text-zinc-400 dark:text-zinc-500';
 const inputWithIconClass = `${inputClass} pl-10`;
 const textareaWithIconClass = `${inputClass} pl-10`;
-const maxAttachmentSize = 2 * 1024 * 1024;
-
 type SubmitStatus = {
   type: 'success' | 'error';
   message: string;
 } | null;
 
-async function getAttachmentPayload(attachment: FormDataEntryValue | null) {
+function getAttachmentPayload(attachment: FormDataEntryValue | null) {
   if (!(attachment instanceof File) || attachment.size === 0) {
     return null;
   }
-
-  if (attachment.size > maxAttachmentSize) {
-    throw new Error('Please upload an attachment smaller than 2 MB.');
-  }
-
-  const content = await new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const result = typeof reader.result === 'string' ? reader.result : '';
-      resolve(result.split(',')[1] || '');
-    };
-
-    reader.onerror = () => reject(new Error('Unable to read the selected attachment.'));
-    reader.readAsDataURL(attachment);
-  });
 
   return {
     name: attachment.name,
     size: attachment.size,
     type: attachment.type,
-    content,
   };
 }
 
@@ -67,7 +48,7 @@ const ContactPage: React.FC = () => {
         phone: String(formData.get('phone') || ''),
         hiringReason: String(formData.get('hiringReason') || ''),
         projectDetails: String(formData.get('projectDetails') || ''),
-        attachment: await getAttachmentPayload(attachment),
+        attachment: getAttachmentPayload(attachment),
       };
 
       const response = await fetch('/api/contact', {
