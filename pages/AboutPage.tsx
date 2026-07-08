@@ -3,7 +3,7 @@ import { FiBriefcase, FiCheckCircle, FiGlobe, FiHeart, FiMail, FiMapPin, FiPhone
 import { HiAcademicCap } from 'react-icons/hi';
 import { profileData } from '../data/profile';
 import { Pill, PrimaryButton, SecondaryButton, SectionIntro, Surface } from '../components/PublicUI';
-import sideProfile from '../assets/Side.jpg';
+import sideProfile from '../assets/Side.webp';
 
 const detailCards = [
   { label: 'Email', value: profileData.email, icon: FiMail, href: `mailto:${profileData.email}` },
