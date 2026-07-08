@@ -75,7 +75,7 @@ const HomePage: React.FC = () => {
           >
             {[
               [`${profileData.yearsOfExperience}+`, 'Years'],
-              [`${projects.length}`, 'Projects'],
+              [`${projects.length}+`, 'Projects'],
               [`${profileData.skills.length}+`, 'Skills'],
             ].map(([value, label]) => (
               <div key={label} className="py-5 pr-4">
