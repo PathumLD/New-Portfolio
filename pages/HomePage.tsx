@@ -45,17 +45,17 @@ const HomePage: React.FC = () => {
           </div>
 
           <h1
-            className="text-sheen animated-element animate-fade-in-up mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-7xl"
+            className="text-sheen animated-element mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-7xl"
             style={{ '--stagger': 1 } as React.CSSProperties}
           >
-            Building clean software with a designer&apos;s eye.
+            Engineering software. Designing visuals. Teaching what I build.
           </h1>
 
           <p
             className="animated-element animate-fade-in-up mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-300"
             style={{ '--stagger': 2 } as React.CSSProperties}
           >
-            I&apos;m {profileData.name}, a {profileData.title.toLowerCase()} who turns practical ideas into polished digital experiences.
+            I&apos;m {profileData.name} — a full-stack software engineer, visual designer, and educator who turns practical ideas into polished digital experiences, and helps others learn to build them too.
           </p>
 
           <div

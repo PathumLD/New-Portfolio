@@ -33,8 +33,8 @@ const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({ proje
   </Surface>
 );
 
-const ProjectList: React.FC<{ category: ProjectCategory; items: Project[] }> = ({ category, items }) => {
-  const filteredProjects = items.filter((project) => project.category === category);
+const ProjectList: React.FC<{ category?: ProjectCategory; items: Project[] }> = ({ category, items }) => {
+  const filteredProjects = category ? items.filter((project) => project.category === category) : items;
 
   if (filteredProjects.length === 0) {
     return <Surface className="p-8 text-center text-zinc-600 dark:text-zinc-300">No projects in this category yet.</Surface>;
@@ -55,10 +55,13 @@ const ProjectsPage: React.FC = () => {
   const [featuredProject, ...remainingProjects] = projects;
   const archiveProjects = featuredProject ? remainingProjects : projects;
   const categories = Array.from(new Set(archiveProjects.map((project) => project.category)));
-  const tabs = categories.map((category) => ({
-    label: category,
-    content: <ProjectList category={category} items={archiveProjects} />,
-  }));
+  const tabs = [
+    { label: 'All', content: <ProjectList items={archiveProjects} /> },
+    ...categories.map((category) => ({
+      label: category,
+      content: <ProjectList category={category} items={archiveProjects} />,
+    })),
+  ];
 
   return (
     <div className="space-y-16">
@@ -75,7 +78,7 @@ const ProjectsPage: React.FC = () => {
         </section>
       )}
 
-      {tabs.length > 0 && (
+      {archiveProjects.length > 0 && (
         <section>
           <SectionIntro eyebrow="Archive" title="Browse by discipline." />
           <TabbedContent tabs={tabs} />

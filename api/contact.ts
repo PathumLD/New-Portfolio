@@ -30,8 +30,8 @@ type NormalizedContactPayload = {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const contactEmailTo = process.env.CONTACT_EMAIL_TO || 'pathumlk.diz@gmail.com';
-const contactEmailFrom = process.env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>';
+const contactEmailTo = process.env.CONTACT_EMAIL_TO || 'pathumld.career@gmail.com';
+const contactEmailFrom = process.env.RESEND_FROM_EMAIL || 'Portfolio Contact <contact@pathumld.com>';
 const maxAttachmentSize = 2 * 1024 * 1024;
 
 function sendJson(res: ServerResponse, statusCode: number, payload: Record<string, unknown>) {

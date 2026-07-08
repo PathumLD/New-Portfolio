@@ -273,7 +273,8 @@
       background-size: 220% 100%;
       -webkit-background-clip: text;
       background-clip: text;
-      animation: text-sheen 8s ease-in-out infinite;
+      -webkit-text-fill-color: transparent;
+      animation: fade-in-up 0.8s ease-out forwards, text-sheen 8s ease-in-out infinite;
     }
 
     @keyframes text-sheen {
