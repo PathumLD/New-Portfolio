@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
               <span className="block truncate text-sm font-semibold leading-tight tracking-tight text-zinc-950 dark:text-white">
                 Pathum Dissanayake
               </span>
-              <span className="hidden text-xs text-zinc-500 dark:text-zinc-400 sm:block">Software Engineer / Designer / Educator</span>
+              <span className="hidden text-xs text-zinc-500 dark:text-zinc-400 sm:block">Software Engineer | Designer | Educator</span>
             </span>
           </NavLink>
 

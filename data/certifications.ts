@@ -41,4 +41,32 @@ export const certifications: Certification[] = [
     date: 'Listed on LinkedIn',
     credentialUrl: 'https://www.credly.com/badges/0c1f1c08-3365-4366-83f9-0578d4d745f1/public_url',
   },
+  {
+    id: 7,
+    title: 'Networking Essentials',
+    issuer: 'Cisco Networking Academy',
+    date: 'Listed on LinkedIn',
+    credentialUrl: 'https://www.linkedin.com/posts/pathumld_networking-essentials-activity-7089685699381075969-s44w?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbSQqUBAvBBb56O1Zk6240l5m1Z7jq2CfU',
+  },
+  {
+    id: 8,
+    title: 'The Cybersecurity Threat Landscape',
+    issuer: 'Linkedin Learning',
+    date: 'Listed on LinkedIn',
+    credentialUrl: 'https://lnkd.in/gBBgC3ez',
+  },
+  {
+    id: 9,
+    title: 'DevOps Foundations: DevSecOps',
+    issuer: 'Linkedin Learning',
+    date: 'Listed on LinkedIn',
+    credentialUrl: 'https://lnkd.in/gJPRrppd',
+  },
+  {
+    id: 10,
+    title: 'Jenkings',
+    issuer: 'Kodekloud',
+    date: 'Listed on LinkedIn',
+    credentialUrl: 'https://www.linkedin.com/posts/pathumld_kodekloud-jenkins-learningneverstops-activity-7302319456347635713-qOc1?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbSQqUBAvBBb56O1Zk6240l5m1Z7jq2CfU',
+  },
 ];
