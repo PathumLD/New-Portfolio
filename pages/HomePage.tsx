@@ -48,7 +48,7 @@ const HomePage: React.FC = () => {
             className="text-sheen animated-element mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-7xl"
             style={{ '--stagger': 1 } as React.CSSProperties}
           >
-            Engineering software. Designing visuals. Teaching what I build.
+            Engineering software. Designing visuals. Teaching what I know.
           </h1>
 
           <p

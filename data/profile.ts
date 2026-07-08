@@ -15,7 +15,9 @@ import {
   FaLaravel,
   FaGitAlt,
   FaProjectDiagram,
-  FaGlobe
+  FaGlobe,
+  FaMedium,
+  FaBehance,
 } from 'react-icons/fa';
 import {
   SiAngular,
@@ -104,6 +106,8 @@ export const profileData: ProfileData = {
   socials: [
     { name: 'GitHub', url: 'https://github.com/PathumLD', icon: FaGithub },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/pathumld', icon: FaLinkedin },
-    { name: 'Portfolio', url: 'https://pathumld.vercel.app/', icon: FaGlobe },
+    { name: 'Medium', url: 'https://medium.com/@pathumld', icon: FaMedium },
+    { name: 'Behance', url: 'https://www.behance.net/pathumld', icon: FaBehance },
+    { name: 'Portfolio', url: 'https://pathumld.com/', icon: FaGlobe },
   ],
 };
