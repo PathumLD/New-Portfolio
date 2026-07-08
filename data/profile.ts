@@ -40,7 +40,7 @@ import {
   SiAdobeindesign,
   SiCanva
 } from 'react-icons/si';
-import profile from '../assets/profile.webp';
+import profile from '../assets/PathumLD.webp';
 
 export const profileData: ProfileData = {
   name: 'Pathum Dissanayake',
