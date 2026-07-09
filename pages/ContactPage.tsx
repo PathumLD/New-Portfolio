@@ -228,15 +228,15 @@ const ContactPage: React.FC = () => {
 
           <Surface className="overflow-hidden">
             <iframe
-              src="https://www.google.com/maps?q=Kurunegala%2C%20Sri%20Lanka&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15828.841002411154!2d80.2565217!3d7.330267849999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3180aee201c1b%3A0xbd1fabb7e545857d!2sPoramadala!5e0!3m2!1sen!2slk!4v1783584334903!5m2!1sen!2slk"
               width="100%"
               height="320"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="h-80 w-full grayscale transition duration-500 hover:grayscale-0"
-              title="Kurunegala, Sri Lanka map"
+              title="Poramadala, Sri Lanka map"
             />
           </Surface>
         </div>
