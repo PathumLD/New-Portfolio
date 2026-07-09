@@ -56,7 +56,7 @@ export const profileData: ProfileData = {
   languages: ['English', 'Sinhala'],
   education: 'BSc in Information Systems, University of Colombo School of Computing',
   profilePicture: profile,
-  shortBio: 'Full-stack software engineer building scalable web applications with React, Next.js, Node.js, ASP.NET Core, Java, and modern database platforms.',
+  shortBio: 'Software engineer, graphic designer, and educator building scalable web products, polished visual experiences, and practical learning spaces.',
   longBio: `
     I am a Full Stack Software Engineer with hands-on experience designing, building, and deploying production-ready web applications using modern frontend and backend technologies. I work across the software development lifecycle, from system design and database modeling to API development, frontend implementation, testing, and cloud deployment.
     

@@ -14,6 +14,9 @@ const detailCards = [
   { label: 'Languages', value: profileData.languages.join(', '), icon: FiGlobe },
 ];
 
+const aboutProfile =
+  'I build production-ready web applications with the eye of a designer and the patience of an educator. My work connects clean engineering, thoughtful interfaces, and practical communication so ideas become products people can understand, use, and trust.';
+
 const AboutPage: React.FC = () => {
   const bioSections = profileData.longBio.trim().split('\n\n').filter(Boolean);
 
@@ -38,7 +41,7 @@ const AboutPage: React.FC = () => {
           <Surface className="p-6">
             <Pill tone="emerald">{profileData.title}</Pill>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">{profileData.name}</h2>
-            <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{profileData.shortBio}</p>
+            <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{aboutProfile}</p>
             <div className="mt-6 border-l-2 border-emerald-500 pl-5">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Education</p>
               <p className="mt-2 text-lg font-semibold text-zinc-950 dark:text-white">{profileData.education}</p>

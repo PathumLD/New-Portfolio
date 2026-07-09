@@ -51,12 +51,12 @@ const HomePage: React.FC = () => {
             Engineering software. Designing visuals. Teaching what I know.
           </h1>
 
-          <p
+          {/* <p
             className="animated-element animate-fade-in-up mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-300"
             style={{ '--stagger': 2 } as React.CSSProperties}
           >
-            I&apos;m {profileData.name} — a full-stack software engineer, visual designer, and educator who turns practical ideas into polished digital experiences, and helps others learn to build them too.
-          </p>
+            I&apos;m {profileData.name} — a software engineer, graphic designer, and educator turning practical ideas into scalable products, polished visuals, and clear learning experiences.
+          </p> */}
 
           <div
             className="animated-element animate-fade-in-up mt-8 flex flex-col gap-3 sm:flex-row"
