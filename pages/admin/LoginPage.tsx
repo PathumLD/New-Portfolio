@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn } from 'react-icons/fi';
+import { useTheme } from '../../contexts/ThemeContext';
+import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn, FiMoon, FiSun } from 'react-icons/fi';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('pathumlk.diz@gmail.com');
@@ -10,6 +11,7 @@ const LoginPage: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { signIn } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +30,15 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-dark-background p-4">
+        <div className="relative min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-background p-4">
+            <button
+                type="button"
+                onClick={toggleTheme}
+                className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-lg border border-gray-300 bg-white text-gray-600 transition-colors hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-white"
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            >
+                {theme === 'light' ? <FiMoon className="w-5 h-5" /> : <FiSun className="w-5 h-5" />}
+            </button>
             <div className="w-full max-w-md">
                 <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-800">
                     {/* Header */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import logo from '../../assets/Logo1.png';
 import {
     FiAward,
@@ -18,7 +19,9 @@ import {
     FiLogOut,
     FiMenu,
     FiMessageSquare,
+    FiMoon,
     FiStar,
+    FiSun,
     FiX,
 } from 'react-icons/fi';
 
@@ -60,6 +63,7 @@ const navGroups = [
 
 const AdminLayout: React.FC = () => {
     const { signOut, user } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -183,6 +187,14 @@ const AdminLayout: React.FC = () => {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
+                            <button
+                                type="button"
+                                onClick={toggleTheme}
+                                className="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-emerald-400 hover:text-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:border-white/30 dark:hover:text-emerald-300"
+                                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                            >
+                                {theme === 'light' ? <FiMoon className="h-4 w-4" /> : <FiSun className="h-4 w-4" />}
+                            </button>
                             <a
                                 href="https://pathumld.com/"
                                 className="hidden items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-[#1c1a1c] transition hover:border-emerald-400 hover:text-emerald-700 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200 dark:hover:text-emerald-300 sm:inline-flex"
