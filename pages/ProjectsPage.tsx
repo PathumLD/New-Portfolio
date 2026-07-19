@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiExternalLink } from 'react-icons/fi';
 import TabbedContent from '../components/TabbedContent';
 import { Pill, SectionIntro, SmartLink, Surface } from '../components/PublicUI';
-import { projects } from '../data/projects';
-import { Project, ProjectCategory } from '../types';
+import { projects as fallbackProjects } from '../data/projects';
+import { Project } from '../types';
+import { projectCategoriesService, projectsService } from '../src/services';
+import type { Project as DatabaseProject, ProjectCategoryRecord } from '../src/types/database.types';
 
 const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({ project, featured = false }) => (
   <Surface className={`group overflow-hidden ${featured ? 'lg:grid lg:grid-cols-[1.15fr_0.85fr]' : 'flex h-full flex-col'}`}>
@@ -33,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({ proje
   </Surface>
 );
 
-const ProjectList: React.FC<{ category?: ProjectCategory; items: Project[] }> = ({ category, items }) => {
+const ProjectList: React.FC<{ category?: string; items: Project[] }> = ({ category, items }) => {
   const filteredProjects = category ? items.filter((project) => project.category === category) : items;
 
   if (filteredProjects.length === 0) {
@@ -51,10 +53,59 @@ const ProjectList: React.FC<{ category?: ProjectCategory; items: Project[] }> = 
   );
 };
 
+function mapDatabaseProject(project: DatabaseProject): Project {
+  return {
+    id: project.id,
+    title: project.title,
+    category: project.category,
+    image: project.images[0] || 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+    description: project.description,
+    tags: project.tags,
+    liveUrl: project.demo_link || project.github_link || undefined,
+  };
+}
+
+const fallbackCategories = ['Website', 'Web Applications', 'Mobile Applications'];
+
 const ProjectsPage: React.FC = () => {
-  const [featuredProject, ...remainingProjects] = projects;
-  const archiveProjects = featuredProject ? remainingProjects : projects;
-  const categories = Array.from(new Set(archiveProjects.map((project) => project.category)));
+  const [projectItems, setProjectItems] = useState<Project[]>(fallbackProjects);
+  const [categoryNames, setCategoryNames] = useState<string[]>(fallbackCategories);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProjectsPageData = async () => {
+      try {
+        const [projectData, categoryData] = await Promise.all([
+          projectsService.getAll(),
+          projectCategoriesService.getAll(),
+        ]);
+
+        if (!isMounted) return;
+
+        if (projectData.length > 0) {
+          setProjectItems(projectData.map(mapDatabaseProject));
+        }
+
+        if (categoryData.length > 0) {
+          setCategoryNames(categoryData.map((category: ProjectCategoryRecord) => category.name));
+        }
+      } catch (error) {
+        console.error('Unable to load projects page data from Supabase:', error);
+      }
+    };
+
+    loadProjectsPageData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const [featuredProject, ...remainingProjects] = projectItems;
+  const archiveProjects = featuredProject ? remainingProjects : projectItems;
+  const projectDerivedCategories = archiveProjects.map((project) => project.category);
+  const categories = Array.from(new Set([...categoryNames, ...projectDerivedCategories]));
   const tabs = [
     { label: 'All', content: <ProjectList items={archiveProjects} /> },
     ...categories.map((category) => ({

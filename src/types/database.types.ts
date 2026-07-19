@@ -16,6 +16,9 @@ export type SkillCategory =
     | 'OTHER';
 
 export type ResourceType = 'TEXTBOOK' | 'MODEL_PAPER' | 'NOTE';
+export type BookingStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled';
+export type MeetingType = 'discovery_call';
+export type ContactMessageStatus = 'new' | 'reviewed' | 'archived';
 
 export interface Database {
     public: {
@@ -57,6 +60,7 @@ export interface Database {
                     github_link: string | null;
                     demo_link: string | null;
                     images: string[];
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -69,6 +73,7 @@ export interface Database {
                     github_link?: string | null;
                     demo_link?: string | null;
                     images?: string[];
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -81,6 +86,34 @@ export interface Database {
                     github_link?: string | null;
                     demo_link?: string | null;
                     images?: string[];
+                    display_order?: number;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Relationships: [];
+            };
+            project_categories: {
+                Row: {
+                    id: string;
+                    name: string;
+                    slug: string;
+                    display_order: number;
+                    created_at: string;
+                    updated_at: string;
+                };
+                Insert: {
+                    id?: string;
+                    name: string;
+                    slug: string;
+                    display_order?: number;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Update: {
+                    id?: string;
+                    name?: string;
+                    slug?: string;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -95,6 +128,7 @@ export interface Database {
                     end_date: string | null;
                     description: string;
                     tags: string[];
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -106,6 +140,7 @@ export interface Database {
                     end_date?: string | null;
                     description: string;
                     tags?: string[];
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -117,6 +152,7 @@ export interface Database {
                     end_date?: string | null;
                     description?: string;
                     tags?: string[];
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -131,6 +167,7 @@ export interface Database {
                     end_date: string | null;
                     description: string;
                     skills: string[];
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -142,6 +179,7 @@ export interface Database {
                     end_date?: string | null;
                     description: string;
                     skills?: string[];
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -153,6 +191,7 @@ export interface Database {
                     end_date?: string | null;
                     description?: string;
                     skills?: string[];
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -166,6 +205,7 @@ export interface Database {
                     start_date: string;
                     end_date: string | null;
                     description: string;
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -176,6 +216,7 @@ export interface Database {
                     start_date: string;
                     end_date?: string | null;
                     description: string;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -186,6 +227,7 @@ export interface Database {
                     start_date?: string;
                     end_date?: string | null;
                     description?: string;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -199,6 +241,7 @@ export interface Database {
                     issued_date: string;
                     credential_link: string | null;
                     document_url: string | null;
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -209,6 +252,7 @@ export interface Database {
                     issued_date: string;
                     credential_link?: string | null;
                     document_url?: string | null;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -219,6 +263,7 @@ export interface Database {
                     issued_date?: string;
                     credential_link?: string | null;
                     document_url?: string | null;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -232,6 +277,7 @@ export interface Database {
                     issued_date: string;
                     description: string | null;
                     document_url: string | null;
+                    display_order: number;
                     created_at: string;
                     updated_at: string;
                 };
@@ -242,6 +288,7 @@ export interface Database {
                     issued_date: string;
                     description?: string | null;
                     document_url?: string | null;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -252,6 +299,7 @@ export interface Database {
                     issued_date?: string;
                     description?: string | null;
                     document_url?: string | null;
+                    display_order?: number;
                     created_at?: string;
                     updated_at?: string;
                 };
@@ -422,12 +470,139 @@ export interface Database {
                 };
                 Relationships: [];
             };
+            bookings: {
+                Row: {
+                    id: string;
+                    meeting_type: MeetingType;
+                    duration_minutes: number;
+                    meeting_date: string;
+                    start_time: string;
+                    timezone: string;
+                    client_name: string;
+                    client_email: string;
+                    client_phone: string | null;
+                    notes: string | null;
+                    status: BookingStatus;
+                    source: string;
+                    booking_start_at: string;
+                    booking_end_at: string;
+                    created_at: string;
+                    updated_at: string;
+                };
+                Insert: {
+                    id?: string;
+                    meeting_type?: MeetingType;
+                    duration_minutes: number;
+                    meeting_date: string;
+                    start_time: string;
+                    timezone?: string;
+                    client_name: string;
+                    client_email: string;
+                    client_phone?: string | null;
+                    notes?: string | null;
+                    status?: BookingStatus;
+                    source?: string;
+                    booking_start_at?: string;
+                    booking_end_at?: string;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Update: {
+                    id?: string;
+                    meeting_type?: MeetingType;
+                    duration_minutes?: number;
+                    meeting_date?: string;
+                    start_time?: string;
+                    timezone?: string;
+                    client_name?: string;
+                    client_email?: string;
+                    client_phone?: string | null;
+                    notes?: string | null;
+                    status?: BookingStatus;
+                    source?: string;
+                    booking_start_at?: string;
+                    booking_end_at?: string;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Relationships: [];
+            };
+            contact_messages: {
+                Row: {
+                    id: string;
+                    name: string;
+                    email: string;
+                    phone: string;
+                    hiring_reason: string;
+                    project_details: string;
+                    attachment_bucket: string | null;
+                    attachment_path: string | null;
+                    attachment_url: string | null;
+                    attachment_name: string | null;
+                    attachment_size: number | null;
+                    attachment_type: string | null;
+                    status: ContactMessageStatus;
+                    source: string;
+                    created_at: string;
+                    updated_at: string;
+                };
+                Insert: {
+                    id?: string;
+                    name: string;
+                    email: string;
+                    phone: string;
+                    hiring_reason: string;
+                    project_details: string;
+                    attachment_bucket?: string | null;
+                    attachment_path?: string | null;
+                    attachment_url?: string | null;
+                    attachment_name?: string | null;
+                    attachment_size?: number | null;
+                    attachment_type?: string | null;
+                    status?: ContactMessageStatus;
+                    source?: string;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Update: {
+                    id?: string;
+                    name?: string;
+                    email?: string;
+                    phone?: string;
+                    hiring_reason?: string;
+                    project_details?: string;
+                    attachment_bucket?: string | null;
+                    attachment_path?: string | null;
+                    attachment_url?: string | null;
+                    attachment_name?: string | null;
+                    attachment_size?: number | null;
+                    attachment_type?: string | null;
+                    status?: ContactMessageStatus;
+                    source?: string;
+                    created_at?: string;
+                    updated_at?: string;
+                };
+                Relationships: [];
+            };
         };
         Views: {};
-        Functions: {};
+        Functions: {
+            get_unavailable_booking_slots: {
+                Args: {
+                    slot_date: string;
+                    slot_timezone: string;
+                    slot_duration_minutes: number;
+                };
+                Returns: {
+                    start_time: string;
+                }[];
+            };
+        };
         Enums: {
             skill_category: SkillCategory;
             resource_type: ResourceType;
+            booking_status: BookingStatus;
+            meeting_type: MeetingType;
         };
     };
 }
@@ -440,6 +615,10 @@ export type SkillUpdate = Database['public']['Tables']['skills']['Update'];
 export type Project = Database['public']['Tables']['projects']['Row'];
 export type ProjectInsert = Database['public']['Tables']['projects']['Insert'];
 export type ProjectUpdate = Database['public']['Tables']['projects']['Update'];
+
+export type ProjectCategoryRecord = Database['public']['Tables']['project_categories']['Row'];
+export type ProjectCategoryRecordInsert = Database['public']['Tables']['project_categories']['Insert'];
+export type ProjectCategoryRecordUpdate = Database['public']['Tables']['project_categories']['Update'];
 
 export type Experience = Database['public']['Tables']['experiences']['Row'];
 export type ExperienceInsert = Database['public']['Tables']['experiences']['Insert'];
@@ -480,3 +659,11 @@ export type TutoringResourceUpdate = Database['public']['Tables']['tutoring_reso
 export type Blog = Database['public']['Tables']['blogs']['Row'];
 export type BlogInsert = Database['public']['Tables']['blogs']['Insert'];
 export type BlogUpdate = Database['public']['Tables']['blogs']['Update'];
+
+export type Booking = Database['public']['Tables']['bookings']['Row'];
+export type BookingInsert = Database['public']['Tables']['bookings']['Insert'];
+export type BookingUpdate = Database['public']['Tables']['bookings']['Update'];
+
+export type ContactMessage = Database['public']['Tables']['contact_messages']['Row'];
+export type ContactMessageInsert = Database['public']['Tables']['contact_messages']['Insert'];
+export type ContactMessageUpdate = Database['public']['Tables']['contact_messages']['Update'];

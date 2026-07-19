@@ -17,10 +17,22 @@ import BlogPage from './pages/BlogPage';
 import LoginPage from './pages/admin/LoginPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import DashboardPage from './pages/admin/DashboardPage';
+import BookingsPage from './pages/admin/BookingsPage';
+import MessagesPage from './pages/admin/MessagesPage';
+import ExperiencesPage from './pages/admin/ExperiencesPage';
+import ProjectsAdminPage from './pages/admin/ProjectsAdminPage';
+import ProjectCategoriesPage from './pages/admin/ProjectCategoriesPage';
+import EducationPage from './pages/admin/EducationPage';
+import VolunteersPage from './pages/admin/VolunteersPage';
+import CertificatesPage from './pages/admin/CertificatesPage';
+import AwardsPage from './pages/admin/AwardsPage';
+
+const isAdminHost = () =>
+  typeof window !== 'undefined' && window.location.hostname.toLowerCase() === 'admin.pathumld.com';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
 
   if (loading) {
     return (
@@ -30,7 +42,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return <Navigate to="/admin/login" replace />;
   }
 
@@ -41,6 +53,10 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 const PublicLayout: React.FC = () => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
+
+  if (isAdminHost()) {
+    return <Navigate to="/admin" replace />;
+  }
 
   return (
     <div className="site-backdrop relative flex min-h-screen flex-col overflow-x-hidden text-zinc-950 transition-colors duration-300 dark:text-white">
@@ -93,7 +109,15 @@ const App: React.FC = () => {
               }
             >
               <Route index element={<DashboardPage />} />
-              {/* Add more admin routes here as needed */}
+              <Route path="bookings" element={<BookingsPage />} />
+              <Route path="messages" element={<MessagesPage />} />
+              <Route path="experiences" element={<ExperiencesPage />} />
+              <Route path="projects" element={<ProjectsAdminPage />} />
+              <Route path="project-categories" element={<ProjectCategoriesPage />} />
+              <Route path="education" element={<EducationPage />} />
+              <Route path="volunteers" element={<VolunteersPage />} />
+              <Route path="certificates" element={<CertificatesPage />} />
+              <Route path="awards" element={<AwardsPage />} />
             </Route>
 
             {/* Public Routes - with main layout */}

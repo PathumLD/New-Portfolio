@@ -1,17 +1,17 @@
 import { IconType } from 'react-icons';
 
 export enum ProjectCategory {
-  WEB_APP = 'Web Apps',
-  MOBILE_APP = 'Mobile Apps',
-  WEBSITES = 'Websites',
+  WEB_APP = 'Web Applications',
+  MOBILE_APP = 'Mobile Applications',
+  WEBSITES = 'Website',
   UI_UX = 'UI/UX',
   GRAPHIC_DESIGN = 'Graphic Designs',
 }
 
 export interface Project {
-  id: number;
+  id: number | string;
   title: string;
-  category: ProjectCategory;
+  category: string;
   image: string;
   description: string;
   tags: string[];
@@ -19,7 +19,7 @@ export interface Project {
 }
 
 export interface Certification {
-  id: number;
+  id: number | string;
   title: string;
   issuer: string;
   date: string;
@@ -27,7 +27,7 @@ export interface Certification {
 }
 
 export interface Award {
-  id: number;
+  id: number | string;
   title: string;
   issuer: string;
   date: string;
@@ -35,15 +35,16 @@ export interface Award {
 }
 
 export interface Education {
-  id: number;
+  id: number | string;
   institution: string;
   degree: string;
   period: string;
   description: string;
+  skills?: string[];
 }
 
 export interface Experience {
-  id: number;
+  id: number | string;
   company: string;
   role: string;
   period: string;
@@ -52,7 +53,7 @@ export interface Experience {
 }
 
 export interface Volunteering {
-  id: number;
+  id: number | string;
   organization: string;
   role: string;
   period: string;

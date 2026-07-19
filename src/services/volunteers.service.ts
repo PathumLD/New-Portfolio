@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Volunteer, VolunteerInsert, VolunteerUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const volunteersService = {
     async getAll(): Promise<Volunteer[]> {
         const { data, error } = await supabase
             .from('volunteers')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('start_date', { ascending: false });
 
         if (error) throw error;
@@ -26,7 +28,7 @@ export const volunteersService = {
     async create(volunteer: VolunteerInsert): Promise<Volunteer> {
         const { data, error } = await supabase
             .from('volunteers')
-            .insert(volunteer)
+            .insert(withCreateMetadata(volunteer))
             .select()
             .single();
 

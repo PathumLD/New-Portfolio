@@ -1,0 +1,9 @@
+project_id = "lmwppgxqeycbhyuudymf"
+
+# The send-reply function authenticates the admin internally (it validates the
+# session token and checks the admin email), so the platform-level JWT gateway
+# is disabled. This is required so the browser CORS preflight (OPTIONS), which
+# carries no Authorization header, can reach the function instead of being
+# rejected by the gateway with a non-2xx status.
+[functions.send-reply]
+verify_jwt = false

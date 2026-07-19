@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Experience, ExperienceInsert, ExperienceUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const experiencesService = {
     async getAll(): Promise<Experience[]> {
         const { data, error } = await supabase
             .from('experiences')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('start_date', { ascending: false });
 
         if (error) throw error;
@@ -26,7 +28,7 @@ export const experiencesService = {
     async create(experience: ExperienceInsert): Promise<Experience> {
         const { data, error } = await supabase
             .from('experiences')
-            .insert(experience)
+            .insert(withCreateMetadata(experience))
             .select()
             .single();
 

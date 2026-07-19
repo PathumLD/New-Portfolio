@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiAward, FiExternalLink } from 'react-icons/fi';
 import TabbedContent from '../components/TabbedContent';
-import { awards } from '../data/awards';
-import { certifications } from '../data/certifications';
+import { awards as fallbackAwards } from '../data/awards';
+import { certifications as fallbackCertifications } from '../data/certifications';
 import { Award, Certification } from '../types';
 import { Pill, SectionIntro, SmartLink, Surface } from '../components/PublicUI';
+import { awardsService, certificatesService } from '../src/services';
+import type { Award as DatabaseAward, Certificate as DatabaseCertificate } from '../src/types/database.types';
 
 const AchievementCard: React.FC<{ item: Certification | Award; index: number }> = ({ item, index }) => (
   <Surface className="p-5">
@@ -46,10 +48,68 @@ const AchievementList: React.FC<{ items: (Certification | Award)[] }> = ({ items
   );
 };
 
+const achievementDateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
+
+function formatAchievementDate(date: string) {
+  return achievementDateFormatter.format(new Date(`${date}T00:00:00`));
+}
+
+function mapDatabaseCertificate(item: DatabaseCertificate): Certification {
+  return {
+    id: item.id,
+    title: item.name,
+    issuer: item.organization,
+    date: formatAchievementDate(item.issued_date),
+    credentialUrl: item.credential_link || item.document_url || undefined,
+  };
+}
+
+function mapDatabaseAward(item: DatabaseAward): Award {
+  return {
+    id: item.id,
+    title: item.name,
+    issuer: item.organization,
+    date: formatAchievementDate(item.issued_date),
+    description: item.description || '',
+  };
+}
+
 const CertificationsAwardsPage: React.FC = () => {
+  const [certificationItems, setCertificationItems] = useState<Certification[]>(fallbackCertifications);
+  const [awardItems, setAwardItems] = useState<Award[]>(fallbackAwards);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadAchievements = async () => {
+      try {
+        const [certificateData, awardData] = await Promise.all([
+          certificatesService.getAll(),
+          awardsService.getAll(),
+        ]);
+
+        if (!isMounted) return;
+
+        if (certificateData.length > 0) setCertificationItems(certificateData.map(mapDatabaseCertificate));
+        if (awardData.length > 0) setAwardItems(awardData.map(mapDatabaseAward));
+      } catch (error) {
+        console.error('Unable to load achievements from Supabase:', error);
+      }
+    };
+
+    loadAchievements();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const tabs = [
-    { label: 'Certifications', content: <AchievementList items={certifications} /> },
-    { label: 'Awards', content: <AchievementList items={awards} /> },
+    { label: 'Certifications', content: <AchievementList items={certificationItems} /> },
+    { label: 'Awards', content: <AchievementList items={awardItems} /> },
   ];
 
   return (
@@ -69,11 +129,11 @@ const CertificationsAwardsPage: React.FC = () => {
         <div className="grid gap-4 sm:grid-cols-2 md:col-span-2">
           <div className="border-l-2 border-emerald-500 pl-4">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Certifications</p>
-            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{certifications.length}</p>
+            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{certificationItems.length}</p>
           </div>
           <div className="border-l-2 border-cyan-500 pl-4">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">Awards</p>
-            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{awards.length}</p>
+            <p className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">{awardItems.length}</p>
           </div>
         </div>
       </Surface>

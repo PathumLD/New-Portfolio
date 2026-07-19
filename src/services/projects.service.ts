@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Project, ProjectInsert, ProjectUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const projectsService = {
     async getAll(): Promise<Project[]> {
         const { data, error } = await supabase
             .from('projects')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('created_at', { ascending: false });
 
         if (error) throw error;
@@ -28,6 +30,7 @@ export const projectsService = {
             .from('projects')
             .select('*')
             .eq('category', category)
+            .order('display_order', { ascending: true })
             .order('created_at', { ascending: false });
 
         if (error) throw error;
@@ -37,7 +40,7 @@ export const projectsService = {
     async create(project: ProjectInsert): Promise<Project> {
         const { data, error } = await supabase
             .from('projects')
-            .insert(project)
+            .insert(withCreateMetadata(project))
             .select()
             .single();
 

@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiBriefcase, FiCalendar, FiMapPin } from 'react-icons/fi';
 import TabbedContent from '../components/TabbedContent';
 import { Pill, SectionIntro, Surface } from '../components/PublicUI';
 import { education } from '../data/education';
-import { experience } from '../data/experience';
+import { experience as fallbackExperience } from '../data/experience';
 import { volunteering } from '../data/volunteering';
 import { Education, Experience, Volunteering } from '../types';
+import { educationService, experiencesService, volunteersService } from '../src/services';
+import type {
+  Education as DatabaseEducation,
+  Experience as DatabaseExperience,
+  Volunteer as DatabaseVolunteer,
+} from '../src/types/database.types';
 
 type TimelineItem = Education | Experience | Volunteering;
 
@@ -23,7 +29,7 @@ const getOrganization = (item: TimelineItem) => {
 const TimelineCard: React.FC<{ item: TimelineItem; index: number }> = ({ item, index }) => (
   <div className="relative grid gap-4 pl-9 md:grid-cols-[10rem_1fr] md:pl-0">
     <div className="absolute left-2 top-2 h-full w-px bg-zinc-200 dark:bg-white/10 md:hidden" />
-    <span className="absolute left-0 top-1 grid h-5 w-5 place-items-center border border-emerald-500 bg-white dark:bg-zinc-950 md:left-[10.45rem]">
+    <span className="absolute left-0 top-1 grid h-5 w-5 place-items-center border border-emerald-500 bg-white dark:bg-[#151518] md:left-[10.45rem]">
       <span className="h-2 w-2 bg-emerald-500" />
     </span>
     <div className="hidden border-r border-zinc-200 pr-7 text-right dark:border-white/10 md:block">
@@ -64,11 +70,84 @@ const Timeline: React.FC<{ items: TimelineItem[] }> = ({ items }) => (
   </div>
 );
 
+const monthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
+
+function formatDatabaseDate(date: string) {
+  return monthFormatter.format(new Date(`${date}T00:00:00`));
+}
+
+function mapDatabaseExperience(item: DatabaseExperience, index: number): Experience {
+  return {
+    id: item.id || index + 1,
+    company: item.company,
+    role: item.job_title,
+    period: `${formatDatabaseDate(item.start_date)} - ${item.end_date ? formatDatabaseDate(item.end_date) : 'Present'}`,
+    description: item.description,
+    skills: item.tags,
+  };
+}
+
+function mapDatabaseEducation(item: DatabaseEducation, index: number): Education {
+  return {
+    id: item.id || index + 1,
+    institution: item.university,
+    degree: item.degree,
+    period: `${formatDatabaseDate(item.start_date)} - ${item.end_date ? formatDatabaseDate(item.end_date) : 'Present'}`,
+    description: item.description,
+    skills: item.skills,
+  };
+}
+
+function mapDatabaseVolunteer(item: DatabaseVolunteer, index: number): Volunteering {
+  return {
+    id: item.id || index + 1,
+    organization: item.community,
+    role: item.role,
+    period: `${formatDatabaseDate(item.start_date)} - ${item.end_date ? formatDatabaseDate(item.end_date) : 'Present'}`,
+    description: item.description,
+  };
+}
+
 const CredentialsPage: React.FC = () => {
+  const [experienceItems, setExperienceItems] = useState<Experience[]>(fallbackExperience);
+  const [educationItems, setEducationItems] = useState<Education[]>(education);
+  const [volunteeringItems, setVolunteeringItems] = useState<Volunteering[]>(volunteering);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadTimeline = async () => {
+      try {
+        const [experienceData, educationData, volunteerData] = await Promise.all([
+          experiencesService.getAll(),
+          educationService.getAll(),
+          volunteersService.getAll(),
+        ]);
+
+        if (!isMounted) return;
+
+        if (experienceData.length > 0) setExperienceItems(experienceData.map(mapDatabaseExperience));
+        if (educationData.length > 0) setEducationItems(educationData.map(mapDatabaseEducation));
+        if (volunteerData.length > 0) setVolunteeringItems(volunteerData.map(mapDatabaseVolunteer));
+      } catch (error) {
+        console.error('Unable to load timeline data from Supabase:', error);
+      }
+    };
+
+    loadTimeline();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const tabs = [
-    { label: 'Experience', content: <Timeline items={experience} /> },
-    { label: 'Education', content: <Timeline items={education} /> },
-    { label: 'Volunteering', content: <Timeline items={volunteering} /> },
+    { label: 'Experience', content: <Timeline items={experienceItems} /> },
+    { label: 'Education', content: <Timeline items={educationItems} /> },
+    { label: 'Volunteering', content: <Timeline items={volunteeringItems} /> },
   ];
 
   return (
@@ -82,9 +161,9 @@ const CredentialsPage: React.FC = () => {
 
       <Surface className="grid gap-5 p-5 md:grid-cols-3">
         {[
-          ['Experience', `${experience.length} roles`],
-          ['Education', `${education.length} records`],
-          ['Volunteering', `${volunteering.length} activities`],
+          ['Experience', `${experienceItems.length} roles`],
+          ['Education', `${educationItems.length} records`],
+          ['Volunteering', `${volunteeringItems.length} activities`],
         ].map(([label, value]) => (
           <div key={label} className="border-l-2 border-emerald-500 pl-4">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">{label}</p>

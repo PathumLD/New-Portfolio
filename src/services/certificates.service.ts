@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Certificate, CertificateInsert, CertificateUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const certificatesService = {
     async getAll(): Promise<Certificate[]> {
         const { data, error } = await supabase
             .from('certificates')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('issued_date', { ascending: false });
 
         if (error) throw error;
@@ -26,7 +28,7 @@ export const certificatesService = {
     async create(certificate: CertificateInsert): Promise<Certificate> {
         const { data, error } = await supabase
             .from('certificates')
-            .insert(certificate)
+            .insert(withCreateMetadata(certificate))
             .select()
             .single();
 

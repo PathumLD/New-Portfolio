@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Award, AwardInsert, AwardUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const awardsService = {
     async getAll(): Promise<Award[]> {
         const { data, error } = await supabase
             .from('awards')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('issued_date', { ascending: false });
 
         if (error) throw error;
@@ -26,7 +28,7 @@ export const awardsService = {
     async create(award: AwardInsert): Promise<Award> {
         const { data, error } = await supabase
             .from('awards')
-            .insert(award)
+            .insert(withCreateMetadata(award))
             .select()
             .single();
 

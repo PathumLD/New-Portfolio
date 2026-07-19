@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
+import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
 const LoginPage: React.FC = () => {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('pathumlk.diz@gmail.com');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { signIn } = useAuth();
@@ -68,7 +69,7 @@ const LoginPage: React.FC = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                                    placeholder="admin@example.com"
+                                    placeholder="pathumlk.diz@gmail.com"
                                 />
                             </div>
                         </div>
@@ -84,13 +85,26 @@ const LoginPage: React.FC = () => {
                                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                 <input
                                     id="password"
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                                    className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                                     placeholder="••••••••"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword((value) => !value)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:hover:text-gray-200"
+                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                    aria-pressed={showPassword}
+                                >
+                                    {showPassword ? (
+                                        <FiEyeOff className="w-5 h-5" />
+                                    ) : (
+                                        <FiEye className="w-5 h-5" />
+                                    )}
+                                </button>
                             </div>
                         </div>
 
@@ -135,7 +149,7 @@ const LoginPage: React.FC = () => {
                     {/* Back link */}
                     <div className="mt-6 text-center">
                         <a
-                            href="/"
+                            href="https://pathumld.com/"
                             className="text-sm text-primary-600 dark:text-primary-400 hover:underline"
                         >
                             ← Back to Portfolio

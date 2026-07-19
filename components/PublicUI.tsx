@@ -101,7 +101,7 @@ export const Surface: React.FC<SurfaceProps> = ({ className = '', children, ...p
     transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
     whileHover={{ y: -4 }}
     {...props}
-    className={`premium-surface border border-zinc-200/80 bg-white/80 shadow-[0_24px_80px_rgba(15,23,42,0.08)] transition-shadow duration-500 hover:shadow-[0_30px_100px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-zinc-950/65 dark:shadow-[0_24px_80px_rgba(0,0,0,0.26)] dark:hover:shadow-[0_30px_100px_rgba(0,0,0,0.42)] ${className}`}
+    className={`premium-surface border border-zinc-200/80 bg-white/80 shadow-[0_24px_80px_rgba(15,23,42,0.08)] transition-shadow duration-500 hover:shadow-[0_30px_100px_rgba(15,23,42,0.14)] dark:border-white/[0.14] dark:bg-[#151518]/95 dark:shadow-[0_24px_80px_rgba(0,0,0,0.36)] dark:hover:shadow-[0_30px_100px_rgba(0,0,0,0.5)] ${className}`}
   >
     {children}
   </motion.div>

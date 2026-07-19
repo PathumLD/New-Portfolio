@@ -1,11 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Education, EducationInsert, EducationUpdate } from '../types/database.types';
+import { withCreateMetadata } from './service-utils';
 
 export const educationService = {
     async getAll(): Promise<Education[]> {
         const { data, error } = await supabase
             .from('education')
             .select('*')
+            .order('display_order', { ascending: true })
             .order('start_date', { ascending: false });
 
         if (error) throw error;
@@ -26,7 +28,7 @@ export const educationService = {
     async create(education: EducationInsert): Promise<Education> {
         const { data, error } = await supabase
             .from('education')
-            .insert(education)
+            .insert(withCreateMetadata(education))
             .select()
             .single();
 

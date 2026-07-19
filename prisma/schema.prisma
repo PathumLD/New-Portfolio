@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Experience {
+  id           String    @id @default(uuid()) @db.Uuid
+  jobTitle     String    @map("job_title")
+  company      String
+  startDate    DateTime  @map("start_date") @db.Date
+  endDate      DateTime? @map("end_date") @db.Date
+  description  String
+  tags         String[]  @default([])
+  displayOrder Int       @default(0) @map("display_order")
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, startDate], map: "experiences_display_order_idx")
+  @@map("experiences")
+}
+
+model Project {
+  id           String   @id @default(uuid()) @db.Uuid
+  title        String
+  description  String
+  category     String
+  tags         String[] @default([])
+  githubLink   String?  @map("github_link")
+  demoLink     String?  @map("demo_link")
+  images       String[] @default([])
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, createdAt], map: "projects_display_order_idx")
+  @@map("projects")
+}
+
+model ProjectCategory {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @unique
+  slug         String   @unique
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, name], map: "project_categories_display_order_idx")
+  @@map("project_categories")
+}
+
+model Education {
+  id           String    @id @default(uuid()) @db.Uuid
+  degree       String
+  university   String
+  startDate    DateTime  @map("start_date") @db.Date
+  endDate      DateTime? @map("end_date") @db.Date
+  description  String
+  skills       String[]  @default([])
+  displayOrder Int       @default(0) @map("display_order")
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, startDate], map: "education_display_order_idx")
+  @@map("education")
+}
+
+model Volunteer {
+  id           String    @id @default(uuid()) @db.Uuid
+  role         String
+  community    String
+  startDate    DateTime  @map("start_date") @db.Date
+  endDate      DateTime? @map("end_date") @db.Date
+  description  String
+  displayOrder Int       @default(0) @map("display_order")
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, startDate], map: "volunteers_display_order_idx")
+  @@map("volunteers")
+}
+
+model Certificate {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String
+  organization   String
+  issuedDate     DateTime @map("issued_date") @db.Date
+  credentialLink String?  @map("credential_link")
+  documentUrl    String?  @map("document_url")
+  displayOrder   Int      @default(0) @map("display_order")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, issuedDate], map: "certificates_display_order_idx")
+  @@map("certificates")
+}
+
+model Award {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String
+  organization String
+  issuedDate   DateTime @map("issued_date") @db.Date
+  description  String?
+  documentUrl  String?  @map("document_url")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([displayOrder, issuedDate], map: "awards_display_order_idx")
+  @@map("awards")
+}
+
+enum BookingStatus {
+  pending
+  confirmed
+  completed
+  cancelled
+
+  @@map("booking_status")
+}
+
+enum MeetingType {
+  discovery_call
+
+  @@map("meeting_type")
+}
+
+model Booking {
+  id              String        @id @default(uuid()) @db.Uuid
+  meetingType     MeetingType   @default(discovery_call) @map("meeting_type")
+  durationMinutes Int           @map("duration_minutes")
+  meetingDate     DateTime      @map("meeting_date") @db.Date
+  startTime       DateTime      @map("start_time") @db.Time(6)
+  timezone        String        @default("Asia/Colombo")
+  clientName      String        @map("client_name")
+  clientEmail     String        @map("client_email")
+  clientPhone     String?       @map("client_phone")
+  notes           String?
+  status          BookingStatus @default(pending)
+  source          String        @default("contact_page")
+  bookingStartAt  DateTime      @map("booking_start_at") @db.Timestamptz(6)
+  bookingEndAt    DateTime      @map("booking_end_at") @db.Timestamptz(6)
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([meetingDate, startTime], map: "bookings_meeting_date_start_time_idx")
+  @@index([bookingStartAt, bookingEndAt], map: "bookings_booking_start_end_idx")
+  @@index([status], map: "bookings_status_idx")
+  @@map("bookings")
+}
+
+model ContactMessage {
+  id               String   @id @default(uuid()) @db.Uuid
+  name             String
+  email            String
+  phone            String
+  hiringReason     String   @map("hiring_reason")
+  projectDetails   String   @map("project_details")
+  attachmentBucket String?  @map("attachment_bucket")
+  attachmentPath   String?  @map("attachment_path")
+  attachmentUrl    String?  @map("attachment_url")
+  attachmentName   String?  @map("attachment_name")
+  attachmentSize   BigInt?  @map("attachment_size")
+  attachmentType   String?  @map("attachment_type")
+  status           String   @default("new")
+  source           String   @default("contact_page")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([createdAt], map: "contact_messages_created_at_idx")
+  @@index([status], map: "contact_messages_status_idx")
+  @@map("contact_messages")
+}

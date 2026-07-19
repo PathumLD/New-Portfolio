@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../src/lib/supabase';
 import type { User, Session } from '@supabase/supabase-js';
 
+const ADMIN_EMAIL = 'pathumlk.diz@gmail.com';
+
 interface AuthContextType {
     user: User | null;
     session: Session | null;
@@ -66,8 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         await supabase.auth.signOut();
     };
 
-    // Simple admin check - you can enhance this with role-based checks
-    const isAdmin = !!user;
+    const isAdmin = user?.email?.toLowerCase() === ADMIN_EMAIL;
 
     const value = {
         user,
